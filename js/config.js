@@ -8,6 +8,11 @@ app.config(function ( $routeProvider ) {
       controller: 'HomeController',
       controlerAs: 'home'
   	})
+    .when('/login', {
+      templateUrl: 'views/login.html',
+      controller: 'LoginController',
+      controllerAs: 'login'
+    })
     .when('/orders', {
       templateUrl: 'views/orderlist.html',
       controller: 'OrderListController',
@@ -38,6 +43,6 @@ app.config(function ( $routeProvider ) {
     	controllerAs: 'customer'
     })
     .otherwise({
-      redirectTo: '/'
+      redirectTo: '/login'
     });
 })

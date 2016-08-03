@@ -3,60 +3,55 @@
 	<div class="panel-body">
 
 		<div class="clearfix home-panels">
-			<div class="col-sm-4">
-				<div class="panel panel-default">
-					<div class="panel-heading">
-						<a href="#/orders">Orders</a>
-					</div>
-					<div class="panel-body">
-						<table class="table">
-							<tr>
-								<th>
-									{{ date.toLocaleDateString() }}
-								</th>
-								<td>
-									<img src="ellipsis.gif" ng-if="!order_count"> {{ order_count }} orders
-									</td>
-									<td>
-									<img src="ellipsis.gif" ng-if="!order_total">
-									${{ order_total.toFixed(2) }}
-									</td>
-								</td>
-							</tr>
-							<tr>
-								<th>
-									{{ compareDate.toLocaleDateString() }}
-								</th>
-								<td>
-									<img src="ellipsis.gif" ng-if="!compare_order_count"> {{ compare_order_count_tonow}} / {{ compare_order_count }} orders
-									</td>
-									<td>
-									<img src="ellipsis.gif" ng-if="!compare_order_total"> ${{ compare_order_total_tonow.toFixed(2) }} / ${{ compare_order_total.toFixed(2) }}
-								</td>
-							</tr>
-						</table>
-					</div>
+			<div class="panel panel-default">
+				<div class="panel-heading">
+					<a href="#/orders">Orders</a>
+				</div>
+				<div class="panel-body">
+					<table class="table">
+						<tr>
+							<th>
+								{{ date.toLocaleDateString() }}
+							</th>
+							<td>
+								<img src="ellipsis.gif" ng-if="!order_count"> {{ order_count }} orders
+							</td>
+							<td>
+								<img src="ellipsis.gif" ng-if="!order_total"> ${{ order_total.toFixed(2) }}
+							</td>
+							</td>
+						</tr>
+						<tr>
+							<th>
+								{{ compareDate.toLocaleDateString() }}
+							</th>
+							<td>
+								<img src="ellipsis.gif" ng-if="!compare_order_count"> {{ compare_order_count_tonow}} / {{ compare_order_count }}
+								orders
+							</td>
+							<td>
+								<img src="ellipsis.gif" ng-if="!compare_order_total"> ${{ compare_order_total_tonow.toFixed(2) }} / ${{ compare_order_total.toFixed(2)
+								}}
+							</td>
+						</tr>
+					</table>
 				</div>
 			</div>
-			<div class="col-sm-4">
-				<div class="panel panel-default">
-					<div class="panel-heading">
-						<a href="#/customers">Customers</a>
-					</div>
-					<div class="panel-body">
-						<img src="ellipsis.gif" ng-if="!newCustomers"> {{ newCustomers }} new -
-						<img src="ellipsis.gif" ng-if="!repeatCustomers"> {{ repeatCustomers }} repeat
-					</div>
+			<div class="panel panel-default">
+				<div class="panel-heading">
+					<a href="#/customers">Customers</a>
+				</div>
+				<div class="panel-body">
+					<img src="ellipsis.gif" ng-if="!newCustomers"> {{ newCustomers }} new -
+					<img src="ellipsis.gif" ng-if="!repeatCustomers"> {{ repeatCustomers }} repeat
 				</div>
 			</div>
-			<div class="col-sm-4">
-				<div class="panel panel-default">
-					<div class="panel-heading">
-						<a href="#/orderitems">Items</a>
-					</div>
-					<div class="panel-body">
-						<img src="ellipsis.gif" ng-if="!total"> {{ total }} {{ total == 1 ? "item" : "items" }}
-					</div>
+			<div class="panel panel-default">
+				<div class="panel-heading">
+					<a href="#/orderitems">Items</a>
+				</div>
+				<div class="panel-body">
+					<img src="ellipsis.gif" ng-if="!total"> {{ total }} {{ total == 1 ? "item" : "items" }}
 				</div>
 			</div>
 		</div>

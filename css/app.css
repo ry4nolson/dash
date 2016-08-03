@@ -12,8 +12,6 @@ body, html { min-height:100%; }
 .nav-bar { background: #333; }
 .navbar-toggle { float:none; }
 
-.home-panels .panel { margin:0 -15px 15px; }
-
 .navbar {
     position:fixed;
     top:0;

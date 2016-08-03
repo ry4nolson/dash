@@ -9,6 +9,8 @@ var app = angular.module('mobileDash', [
   var endDay = new Date();
   $rootScope.requestCount = 0;
 
+  $rootScope.authed = false;
+
   function setDateTime(date, hours, minutes, seconds, milliseconds){
     var newDate = new Date();
     newDate.setTime(date.getTime());
@@ -76,7 +78,13 @@ var app = angular.module('mobileDash', [
 
       $route.reload();
 
-    })
+    });
+
+
+		if (!$rootScope.authed){
+			$location.path("/login");
+		}
+
   });
 
 
