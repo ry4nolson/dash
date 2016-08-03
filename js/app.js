@@ -81,7 +81,12 @@ var app = angular.module('mobileDash', [
     });
 
     $rootScope.doLogout = function() {
-      console.log("do logout")
+      console.log("do logout");
+      localStorage.clear();
+      $rootScope.domain = "";
+      $rootScope.apiKey = "";
+      $location.path("/login");
+      console.log("wtf");
     };
 
 		if (!$rootScope.authed){
