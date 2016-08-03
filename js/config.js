@@ -43,6 +43,6 @@ app.config(function ( $routeProvider ) {
     	controllerAs: 'customer'
     })
     .otherwise({
-      redirectTo: '/login'
+      redirectTo: '/'
     });
 })
