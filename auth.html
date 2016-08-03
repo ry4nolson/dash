@@ -2,6 +2,7 @@
 <html>
 
 <head>
+  <script src="sha256.js"></script>
 </head>
 
 <body>
@@ -14,6 +15,12 @@
       if (current){
         qs[current.split("=")[0]] = current.split("=")[1];
       }
+      localStorage.setItem("")
+      var scope = "read_people,read_orders,read_catalog,read_marketing,no_expiry";
+      var signature = qs.secret + qs.code + qs.client_id + scope + "https://mobiledash.co/";
+      var shaSignature = new jsSHA("SHA-256", signature);
+      var hash = shaSignature.getHash("HEX");
+      console.log(hash);
     }
   </script>
 </body>
