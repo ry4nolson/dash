@@ -1,0 +1,30 @@
+<div class="panel panel-default">
+	<div class="panel-heading">
+		<back-link></back-link>
+		<img src="{{ itemPhoto }}"> {{ product.item_name }}
+	</div>
+	<div class="panel-body">
+		<table class="orders table">
+			<thead>
+				<tr>
+					<th>Order ID</th>
+					<th>Items</th>
+					<th>Total</th>
+					<th>Customer</th>
+					<th>Order #</th>
+				</tr>
+			</thead>
+			<tbody>
+				<tr ng-repeat="order in orders | orderObjectBy: 'id': true">
+					<td><a href="#/orders/{{order.id}}">{{ order.id }}</a></td>
+					<td>{{ totalItems(order.items) }}</td>
+					<td>${{ order.grand_total.toFixed(2) }}</td>
+					<td>
+						<a href="#/customers/{{order.customer_id}}">{{ order.customer.first_name }} {{ order.customer.last_name }} ({{ order.customer_id }})</a>
+					</td>
+					<td>{{ order.customer.order_count }}</td>
+				</tr>
+			</tbody>
+		</table>
+	</div>
+</div>

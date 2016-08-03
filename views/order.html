@@ -1,0 +1,67 @@
+<div class="panel panel-default">
+	<div class="panel-heading">
+		<back-link></back-link> Order {{ order.id}}
+	</div>
+	<div class="panel-body">
+		<div class="panel panel-default text-center">
+			<div class="panel-body">
+				{{ customer.first_name }} {{ customer.last_name }} {{ '$' + order.grand_total.toFixed(2) }}
+			</div>
+		</div>
+		<div class="panel panel-default">
+			<div class="panel-heading">
+				<div class="row">
+					<div class="col-xs-6">Billing</div>
+					<div class="col-xs-6">Shipping</div>
+				</div>
+			</div>
+			<div class="panel-body">
+				<div class="row">
+					<div class="col-xs-6">
+						<div class="billing-address">
+							<div style="overflow:hidden;text-overflow:ellipsis;white-space:nowrap;">{{ billing.first_name }} {{ billing.last_name }}</div>
+							<div>{{ billing.address_line_1 }}</div>
+							<div>{{ billing.address_line_2 }}</div>
+							<div>{{ billing.city }}, {{ billing.state }} {{ billing.postal_code }}</div>
+							<div>{{ billing.country != "United States" ? billing.country : "" }}</div>
+						</div>
+					</div>
+					<div class="col-xs-6">
+						<div class="shipping-address">
+							<div style="overflow:hidden;text-overflow:ellipsis;white-space:nowrap;">{{ shipping.first_name }} {{ shipping.last_name }}</div>
+							<div>{{ shipping.address_line_1 }}</div>
+							<div>{{ shipping.address_line_2 }}</div>
+							<div>{{ shipping.city }}, {{ shipping.state }} {{ shipping.postal_code }}</div>
+							<div>{{ shipping.country != "United States" ? shipping.country : "" }}</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+
+		<table class="table order-items panel panel-default">
+			<thead class="panel-heading">
+				<tr>
+					<th>Item</th>
+					<th>Qty</th>
+					<th>Each</th>
+					<th>Total</th>
+				</tr>
+			</thead>
+			<tbody class="panel-body">
+				<tr ng-repeat="item in order.items">
+					<td>{{ item.item_name }}</td>
+					<td>{{ item.quantity }}</td>
+					<td>{{ item.price }}</td>
+					<td>${{ (item.quantity * item.price).toFixed(2) }}</td>
+				</tr>
+			</tbody>
+			<tfoot>
+				<tr style="border:none" ng-repeat="info in infolines">
+					<td style="border:none;text-align:right" colspan="3"><strong>{{ info.key }}</strong></td>
+					<td style="border:none">${{ info.value.toFixed(2) }}</td>
+				</tr>
+			</tfoot>
+		</table>
+	</div>
+</div>

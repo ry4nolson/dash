@@ -1,0 +1,30 @@
+<div class="panel panel-default">
+	<div class="panel-heading">
+		<back-link></back-link> {{ customer.first_name }} {{ customer.last_name }}
+	</div>
+	<div class="panel-body">
+		<h1 style="text-align: center; display: block;" class="order-price">
+			${{ total.toFixed(2) }}
+		</h1>
+		<table class="orders table">
+			<thead>
+				<tr>
+					<th>Order</th>
+					<th>Items</th>
+				</tr>
+			</thead>
+			<tbody>
+				<tr ng-repeat="order in orders | orderObjectBy: 'id': true">
+					<td>
+						<a href="#/orders/{{order.id}}">{{ order.id }}</a>
+						<div class="small">{{ formatDate(order.ordered_at) }}</div>
+					</td>
+					<td>
+						{{ totalItems(order.items) }} item{{ totalItems(order.items) == 1 ? '' : 's' }} 
+						${{ order.grand_total.toFixed(2) }}
+					</td>
+				</tr>
+			</tbody>
+		</table>
+	</div>
+</div>

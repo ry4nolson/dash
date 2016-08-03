@@ -1,0 +1,95 @@
+body, html { min-height:100%; }
+.sidebar {
+
+  background:#333;
+  position:fixed;
+  top:0;
+  left:0;
+  height:100%;
+  z-index: 2
+}
+.real-sidebar { z-index: 3; }
+.nav-bar { background: #333; }
+.navbar-toggle { float:none; }
+
+.home-panels .panel { margin:0 -15px 15px; }
+
+.navbar {
+    position:fixed;
+    top:0;
+    left:0; right:0;
+    z-index: 10;
+    min-height:50px;
+    height:50px;
+}
+.icon-bar {
+    text-align:center;
+    display:table;
+    width:100%;
+    margin:0;
+    padding:0;
+}
+.icon-bar li { display:table-cell; padding:0;}
+.icon-bar li a {
+    padding:15px;
+    display: inline-block;
+}
+.spacer { height:50px; }
+.main > .panel { margin:0; }
+      @font-face {
+        font-family: 'RobotoDraft';
+        font-style: normal;
+        font-weight: 400;
+        src: local('RobotoDraft'), local('RobotoDraft-Regular'), url(https://fonts.gstatic.com/s/robotodraft/v1/0xES5Sl_v6oyT7dAKuoni4gp9Q8gbYrhqGlRav_IXfk.woff2) format('woff2'), url(https://fonts.gstatic.com/s/robotodraft/v1/0xES5Sl_v6oyT7dAKuoni7rIa-7acMAeDBVuclsi6Gc.woff) format('woff');
+      }
+
+      @font-face {
+        font-family: 'RobotoDraft';
+        font-style: normal;
+        font-weight: 500;
+        src: local('RobotoDraft Medium'), local('RobotoDraft-Medium'), url(https://fonts.gstatic.com/s/robotodraft/v1/u0_CMoUf3y3-4Ss4ci-VwXJuJo8UJJfpGKt7pXjBv4s.woff2) format('woff2'), url(https://fonts.gstatic.com/s/robotodraft/v1/u0_CMoUf3y3-4Ss4ci-VwaTA90I55Xt7owhZwpPnMsc.woff) format('woff');
+      }
+
+      @font-face {
+        font-family: 'RobotoDraft';
+        font-style: normal;
+        font-weight: 700;
+        src: local('RobotoDraft Bold'), local('RobotoDraft-Bold'), url(https://fonts.gstatic.com/s/robotodraft/v1/u0_CMoUf3y3-4Ss4ci-Vwf79_ZuUxCigM2DespTnFaw.woff2) format('woff2'), url(https://fonts.gstatic.com/s/robotodraft/v1/u0_CMoUf3y3-4Ss4ci-VwRbnBKKEOwRKgsHDreGcocg.woff) format('woff');
+      }
+
+      @font-face {
+        font-family: 'RobotoDraft';
+        font-style: italic;
+        font-weight: 400;
+        src: local('RobotoDraft Italic'), local('RobotoDraft-Italic'), url(https://fonts.gstatic.com/s/robotodraft/v1/er-TIW55l9KWsTS1x9bTfgeOulFbQKHxPa89BaxZzA0.woff2) format('woff2'), url(https://fonts.gstatic.com/s/robotodraft/v1/er-TIW55l9KWsTS1x9bTfoo3ZslTYfJv0R05CazkwN8.woff) format('woff');
+      }
+
+      
+      .tdRepeat { text-align:center;}
+      .container.main { margin-top:15px; }
+      a[name] { display:block; position:relative; top:-70px; }
+
+    .fade {
+        position: absolute;
+        left: 0;
+        right: 0;
+        height: 100%;
+        opacity: 1;
+    }
+    .fade.ng-enter,
+    .fade.ng-leave {
+        -webkit-transition: all 1s ease;
+        transition: all 1s ease;
+    }
+    .fade.ng-enter {
+        opacity:0;
+    }
+    .fade.ng-enter-active {
+        opacity:1;
+    }
+    .fade.ng-leave {
+        opacity:1;
+    }
+    .fade.ng-leave-active {
+        opacity:0;
+    }

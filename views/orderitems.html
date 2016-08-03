@@ -1,0 +1,24 @@
+<div class="panel panel-default">
+  <div class="panel-heading">
+    <back-link></back-link>
+    {{ total }} items ordered
+  </div>
+  <div class="panel-body">
+    <table class="items table">
+      <thead>
+        <tr>
+          <th>Item Name</th>
+          <th>Quantity</th>
+          <th>Total</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr ng-repeat="item in items | orderObjectBy: 'total': true">
+          <td><a href="#/product/{{ item.id }}">{{ item.name }}</a></td>
+          <td>{{ item.qty }}</td>
+          <td>${{ item.total.toFixed(2) }}</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>

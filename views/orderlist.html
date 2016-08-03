@@ -1,0 +1,66 @@
+<div class="panel panel-default">
+	<div class="panel-heading">
+		<back-link></back-link>
+		{{ order_count }} {{ order_count == 1 ? 'order' : 'orders'}} - ${{ order_total.toFixed(2) }}
+	</div>
+	<div class="panel-body">
+
+
+
+		<div class="panel panel-default" ng-repeat="order in orders | orderObjectBy: 'id': true">
+			<div class="panel-body">
+				<a href="#/orders/{{order.id}}">{{ order.id }}</a> - {{ totalItems(order.items) }} item{{ totalItems(order.items) ==
+				1 ? '' : 's' }} ${{ order.grand_total.toFixed(2) }} -
+				<span class="small">{{ getTime(order.ordered_at) }}</span>
+				<div>
+					<a href="#/customers/{{order.customer_id}}">
+							{{ order.customer.first_name }} {{ order.customer.last_name }} 
+					</a>
+					<img src="ellipsis.gif" ng-if="order.customer.order_count == undefined">
+					 {{ order.customer.order_count }} order
+				</div>
+
+				<div ng-if="order.public_comments">Comments: {{ order.public_comments }}</div>
+				<div ng-if="order.gift_message">Gift: {{ order.gift_message }}</div>
+				<div ng-if="order.special_instructions">Special: {{ order.special_instructions }}</div>
+			</div>
+
+		</div>
+
+<!--
+		<table class="orders table">
+			<thead>
+				<tr>
+					<th>ID</th>
+					<th>Details</th>
+					<th>Customer</th>
+				</tr>
+			</thead>
+			<tbody>
+				<tr ng-repeat-start="order in orders | orderObjectBy: 'id': true">
+					<td>
+						<a href="#/orders/{{order.id}}">{{ order.id }}</a>
+						<div class="small">{{ getTime(order.ordered_at) }}</div>
+					</td>
+					<td>
+						{{ totalItems(order.items) }} item{{ totalItems(order.items) == 1 ? '' : 's' }} ${{ order.grand_total.toFixed(2) }}
+					</td>
+					<td>
+						<a href="#/customers/{{order.customer_id}}">
+							{{ order.customer.first_name }} {{ order.customer.last_name }} 
+						</a>
+						<div>{{ order.customer.order_count }} order</div>
+					</td>
+				</tr>
+				<tr ng-repeat-end ng-if="order.public_comments || order.gift_message || order.special_instructions">
+					<td colspan="3">
+						<div ng-if="order.public_comments">Comments: {{ order.public_comments }}</div>
+						<div ng-if="order.gift_message">Gift: {{ order.gift_message }}</div>
+						<div ng-if="order.special_instructions">Special: {{ order.special_instructions }}</div>
+					</td>
+				</tr>
+			</tbody>
+		</table>
+-->
+	</div>
+</div>
