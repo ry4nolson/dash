@@ -1,44 +1,28 @@
-<!doctype html>
 <html>
+  <body>
+    <h1> You are being redirected... </h1>
 
-<head>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.2.4/jquery.min.js"></script>
-  <script src="js/sha256.js"></script>
-</head>
-
-<body>
-  <script>
-    var domain;
-    if (localStorage.getItem("domain"))
-      domain = localStorage.getItem("domain");
-
-    var rawQs = document.location.search;
-    var qsList = rawQs.split(/[\?\&]/);
-    var qs = {};
-    for (var param in qsList){
-      var current = qsList[param];
-      if (current){
-        qs[current.split("=")[0]] = current.split("=")[1];
+    <script>
+      parseQuery = function() {
+        var q = window.location.search,
+            _obj = {}, 
+            arr = q ? window.location.search.split('?')[1].split('&') : [];
+        for (var i = 0; i < arr.length; i++) { _obj[arr[i].split('=')[0]] = arr[i].split('=')[1]; }
+        return _obj;
       }
-    }
+      var parsedQuery = parseQuery();
 
-    var scope = "read_people,read_orders,read_catalog,read_marketing,no_expiry";
-    var signature = qs.secret + qs.code + qs.client_id + scope + "https://mobiledash.co/auth.html";
-    var shaSignature = new jsSHA("SHA-256", "TEXT");
-    shaSignature.update(signature);
-    var hash = shaSignature.getHash("HEX");
-    console.log(hash);
 
-    $.ajax({
-      "type": "POST",
-      "url" : "https://" + domain + "/api/oauth/access_token",
-      "data" : {
-        "client_id" : qs.client_id,
-        "auth_id" : qs.auth_id,
-        "signature": hash
-      }
-    })
-  </script>
-</body>
 
+      localStorage.setItem('oauth_auth_id', parsedQuery['auth_id']);
+      localStorage.setItem('oauth_code', parsedQuery['code']);
+      localStorage.setItem('oauth_client_id', parsedQuery['client_id']);
+      localStorage.setItem('oauth_secret', parsedQuery['secret']);
+      console.log(parsedQuery);
+
+      setTimeout(function() {
+        window.location.href = '/';
+      }, 3000);
+    </script>
+  </body>
 </html>

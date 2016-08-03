@@ -1,54 +1,48 @@
-app.controller("LoginController", function LoginController($scope, $rootScope, $location, ApiFactory) {
+app.controller("LoginController", function LoginController($scope, $rootScope, $location, ApiFactory, $http) {
+	$scope.domain = $rootScope.oauth.domain;
 
-	console.log("login page");
+	$scope.doLogin = function() {
+		if ($scope.domain == localStorage.getItem('domain') && $rootScope.oauth.auth_id) {
+			if ($rootScope.oauth.access_token && $rootScope.oauth.access_token.length !== 0) {
+				ApiFactory.getEndpoint("orders?count=1", null, true).then(function () {
+					$rootScope.authenticated = true;
+					$location.path("/")
+				});
+			} else {
+				$rootScope.authenticated = true;
 
+        var sha = new jsSHA('SHA-256', 'TEXT');
+        console.log($rootScope.oauth);
+        sha.update(($rootScope.oauth.secret + $rootScope.oauth.code + $rootScope.oauth.client_id + $rootScope.oauth.scope + decodeURIComponent($rootScope.oauth.redirect_uri)).toLowerCase());
+        $rootScope.oauth.signature = sha.getHash('HEX');
 
-	function checkLogin() {
-		console.log("login checking");
-		$rootScope.domain = $scope.domain;
-		$rootScope.apiKey = $scope.apiKey;
-		ApiFactory.getEndpoint("orders", { "count": 1 }, true).then(function () {
-			console.log(arguments);
-			$rootScope.authed = true;
+				$http({
+					method: 'POST',
+					url: 'https://' + $scope.domain + '/api/oauth/access_token',
+					data: {
+						client_id: $rootScope.oauth.client_id,
+						auth_id: $rootScope.oauth.auth_id,
+						signature: $rootScope.oauth.signature
+					},
+					headers: {
+						'Content-Type': 'application/json'
+					},
+					dataType: 'JSON'
+				}).then(function(res) {
+					console.log(res)
+					$rootScope.oauth.access_token = res.data.access_token;
+					$rootScope.oauth.refresh_token = res.data.refresh_token;
+
+					localStorage.setItem('access_token', $rootScope.oauth.access_token);
+					localStorage.setItem('refresh_token', $rootScope.oauth.refresh_token);
+					localStorage.setItem('signature', $rootScope.oauth.signature);
+
+					$location.path("/")
+				});
+			}
+		} else {
 			localStorage.setItem('domain', $scope.domain);
-			localStorage.setItem('apiKey', $scope.apiKey);
-			$location.path("/")
-		});
-	}
-
-	function getApiKey() {
-		if ($scope.apiKey) {
-			return $scope.apiKey;
-		} else if (localStorage.getItem("apiKey")){
-			$scope.apiKey = localStorage.getItem("apiKey");
-			return localStorage.getItem("apiKey");
-		}
-		else
-			return false;
-	}
-	function getdomain() {
-		if ($scope.domain) {
-			return $scope.domain;
-		} else if (localStorage.getItem("domain")){
-			$scope.domain = localStorage.getItem("domain");
-			return localStorage.getItem("domain");
-		}
-		else
-			return false;
-	}
-
-	if (getdomain() && getApiKey()) {
-		checkLogin();
-	}
-
-	$scope.doLogin = function () {
-		console.log("login");
-		if (getdomain() && getApiKey()) {
-			$rootScope.domain = getdomain();
-			$rootScope.apiKey = getApiKey();
-
-			checkLogin();
+			window.location.href = 'https://' + $scope.domain + $rootScope.oauth.authUrl + '?client_id=' + $rootScope.oauth.app_id + '&scope=' + $rootScope.oauth.scope + '&redirect_uri=' + $rootScope.oauth.redirect_uri;
 		}
 	}
-
 });

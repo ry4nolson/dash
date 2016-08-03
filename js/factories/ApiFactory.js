@@ -8,19 +8,19 @@ angular.module("mobileDash")
 
     exports.data = null;
 
-    exports.domain = $rootScope.domain;
-    exports.apiKey = $rootScope.apiKey;
+    exports.domain = $rootScope.oauth.domain;
+    exports.apiKey = $rootScope.oauth.access_token;
 
     exports.buildEndpoint = function (endpoint) {
-			return "https://" + this.domain + "/api/v1/" + endpoint;
+			return 'https://' + this.domain + "/api/v1/" + endpoint;
     }
 
     exports.getEndpoint = function (endpoint, params, login) {
-			if (!$rootScope.authed && !login){
+			if (!$rootScope.oauth.domain || !$rootScope.oauth.access_token && !login){
 				$location.path("/login");
 			}
-			this.domain = $rootScope.domain;
-			this.apiKey = $rootScope.apiKey;
+			this.domain = $rootScope.oauth.domain;
+			this.apiKey = $rootScope.oauth.access_token;
 
 			var deferred = $q.defer();
 			var self = this;
