@@ -7,8 +7,14 @@
 <body>
   <script>
     var rawQs = document.location.search;
-    var qs = rawQs.split(/[\?\&]/);
-    console.log(qs);
+    var qsList = rawQs.split(/[\?\&]/);
+    var qs = {};
+    for (var param in qsList){
+      var current = qsList[param];
+      if (current){
+        qs[current.split("=")[0]] = current.split("=")[1];
+      }
+    }
   </script>
 </body>
 
