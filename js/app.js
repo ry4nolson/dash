@@ -9,7 +9,7 @@ var app = angular.module('mobileDash', [
     authUrl: '/api/oauth',
     app_id: 'dbe3478d-c559-4f93-b686-532bbe2bdffb',
     scope: 'read_people,read_orders,read_catalog,read_marketing',
-    redirect_uri: encodeURIComponent('http://localhost:8000/auth.html'),
+    redirect_uri: encodeURIComponent('https://mobiledash.co/auth.html'),
     refresh_token: localStorage.getItem('refresh_token'),
     access_token: localStorage.getItem('access_token'),
     signature: localStorage.getItem('signature'),
