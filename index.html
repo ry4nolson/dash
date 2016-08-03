@@ -55,18 +55,17 @@
       </ul>
     </div>
     <div class="col-sm-8 col-sm-offset-2">
-
+      
       <div class="text-center" style="padding:10px 0;">
         {{ requestCount }}<br>
-        <input type="date" ng-model="date"> vs.
+        <input type="date" ng-model="date">
+        vs.
         <input type="date" ng-model="compareDate">
       </div>
       <div ng-view class="main fade"></div>
     </div>
-    <div class="row">
-      <div class="text-center">
-        <button class="btn btn-warning" ng-click="doLogout()">Logout</button>
-      </div>
+    <div class="text-center">
+      <button class="btn btn-warning" ng-click="doLogout()">Logout</button>
     </div>
   </div>
 </body>
