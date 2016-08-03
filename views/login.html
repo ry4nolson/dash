@@ -1,16 +1,12 @@
 <div class="panel panel-default">
     <div class="panel-heading">
-        Enter Your Site Info
+        Log in to your store
     </div>
     <div class="panel-body">
         <div class="form-group">
             <label for="domain">Enter your store's SSL Domain Name</label>
             <input type="text" class="form-control" id="domain" ng-model="domain">
         </div>
-        <div class="form-group">
-            <label for="apiKey">Enter API key</label>
-            <input type="text" class="form-control" id="apiKey" ng-model="apiKey">
-        </div>
-        <button ng-click="login()">Login</button>
+        <button class="btn btn-primary" ng-click="doLogin()">Login with Spark Pay</button>
     </div>
 </div>

@@ -3,13 +3,30 @@ var app = angular.module('mobileDash', [
   'ngAnimate',
   'angular-loading-bar'
 ]).run(function ($rootScope, $route, $location, $animate) {
+  $rootScope.oauth = {
+    authenticated: false,
+    domain: localStorage.getItem('domain'),
+    authUrl: '/api/oauth',
+    app_id: 'dbe3478d-c559-4f93-b686-532bbe2bdffb',
+    scope: 'read_people,read_orders,read_catalog,read_marketing',
+    redirect_uri: encodeURIComponent('http://localhost:8000/auth.html'),
+    refresh_token: localStorage.getItem('refresh_token'),
+    access_token: localStorage.getItem('access_token'),
+    signature: localStorage.getItem('signature'),
+    auth_id: localStorage.getItem('oauth_auth_id'),
+    code: localStorage.getItem('oauth_code'),
+    client_id: localStorage.getItem('oauth_client_id'),
+    secret: localStorage.getItem('oauth_secret')
+  }
+
+  
   $rootScope.location = $location
   var date = new Date();
   var now = new Date();
   var endDay = new Date();
   $rootScope.requestCount = 0;
 
-  $rootScope.authed = false;
+  $rootScope.oauth.authenticated = false;
 
   function setDateTime(date, hours, minutes, seconds, milliseconds){
     var newDate = new Date();
@@ -81,7 +98,7 @@ var app = angular.module('mobileDash', [
     });
 
 
-		if (!$rootScope.authed){
+		if (!$rootScope.oauth.authenticated){
 			$location.path("/login");
 		}
 
