@@ -5,8 +5,10 @@
 </head>
 
 <body>
-<script>
-  console.log(document.location.search);
+  <script>
+    var rawQs = document.location.search;
+    var qs = rawQs.split(/\?\&/);
+    console.log(qs);
   </script>
 </body>
 
