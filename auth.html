@@ -2,11 +2,16 @@
 <html>
 
 <head>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.2.4/jquery.min.js"></script>
   <script src="js/sha256.js"></script>
 </head>
 
 <body>
   <script>
+    var domain;
+    if (localStorage.getItem("domain"))
+      domain = localStorage.getItem("domain");
+
     var rawQs = document.location.search;
     var qsList = rawQs.split(/[\?\&]/);
     var qs = {};
@@ -23,6 +28,16 @@
     shaSignature.update(signature);
     var hash = shaSignature.getHash("HEX");
     console.log(hash);
+
+    $.ajax({
+      "type": "POST",
+      "url" : "https://" + domain + "/api/oauth/access_token",
+      "data" : {
+        "client_id" : qs.client_id,
+        "auth_id" : qs.auth_id,
+        "signature", signature
+      }
+    })
   </script>
 </body>
 
