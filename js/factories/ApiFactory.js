@@ -16,7 +16,7 @@ angular.module("mobileDash")
     }
 
     exports.getEndpoint = function (endpoint, params, login) {
-			if (!$rootScope.domain || !$rootScope.apiKey && !login){
+			if (!$rootScope.authed && !login){
 				$location.path("/login");
 			}
 			this.domain = $rootScope.domain;

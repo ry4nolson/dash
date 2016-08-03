@@ -9,7 +9,7 @@ app.controller("LoginController", function LoginController($scope, $rootScope, $
 		$rootScope.apiKey = $scope.apiKey;
 		ApiFactory.getEndpoint("orders", { "count": 1 }, true).then(function () {
 			console.log(arguments);
-
+			$rootScope.authed = true;
 			localStorage.setItem('domain', $scope.domain);
 			localStorage.setItem('apiKey', $scope.apiKey);
 			$location.path("/")
