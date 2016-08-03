@@ -80,6 +80,9 @@ var app = angular.module('mobileDash', [
 
     });
 
+    $rootScope.doLogout = function() {
+      console.log("do logout")
+    };
 
 		if (!$rootScope.authed){
 			$location.path("/login");

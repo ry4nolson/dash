@@ -12,7 +12,7 @@ angular.module("mobileDash")
     exports.apiKey = $rootScope.apiKey;
 
     exports.buildEndpoint = function (endpoint) {
-			return this.domain + "/api/v1/" + endpoint;
+			return "https://" + this.domain + "/api/v1/" + endpoint;
     }
 
     exports.getEndpoint = function (endpoint, params, login) {
