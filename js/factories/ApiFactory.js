@@ -50,6 +50,8 @@ angular.module("mobileDash")
 
 						if (status == 429)
 							setTimeout(query, 1000);
+						else
+							deferred.error(data);
 					});
 			}
 
