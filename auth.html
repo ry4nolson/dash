@@ -23,7 +23,7 @@
     }
 
     var scope = "read_people,read_orders,read_catalog,read_marketing,no_expiry";
-    var signature = qs.secret + qs.code + qs.client_id + scope + "https://mobiledash.co/";
+    var signature = qs.secret + qs.code + qs.client_id + scope + "https://mobiledash.co/auth.html";
     var shaSignature = new jsSHA("SHA-256", "TEXT");
     shaSignature.update(signature);
     var hash = shaSignature.getHash("HEX");
