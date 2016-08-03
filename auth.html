@@ -1,9 +1,26 @@
+<!doctype html>
 <html>
+
+<head>
+
+  <meta content="yes" name="apple-mobile-web-app-capable" />
+  <meta name="mobile-web-app-capable" content="yes">
+  <meta name="robots" content="noindex">
+  <!-- helps makes site responsive on phones/tablets. -->
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootswatch/3.3.6/paper/bootstrap.min.css">
+</head>
   <body>
-    <h1> You are being redirected... </h1>
+    <div class="container">
+      <div class="panel panel-default">
+        <div class="panel-body">
+          <h1> You are being redirected... </h1>
+        </div>
+      </div>
+    </div>
 
     <script>
-      parseQuery = function() {
+      var parseQuery = function() {
         var q = window.location.search,
             _obj = {}, 
             arr = q ? window.location.search.split('?')[1].split('&') : [];

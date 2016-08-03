@@ -1,10 +1,11 @@
 app.controller("LoginController", function LoginController($scope, $rootScope, $location, ApiFactory, $http) {
 	$scope.domain = $rootScope.oauth.domain;
 
-	$scope.doLogin = function() {
+	$scope.doLogin = function () {
 		if ($scope.domain == localStorage.getItem('domain') && $rootScope.oauth.auth_id) {
 			if ($rootScope.oauth.access_token && $rootScope.oauth.access_token.length !== 0) {
-				ApiFactory.getEndpoint("orders?count=1", null, true).then(function () {
+				ApiFactory.getEndpoint("stores", null, true).then(function (data) {
+					console.log(data);
 					$rootScope.authenticated = true;
 					$location.path("/")
 				});
@@ -28,7 +29,7 @@ app.controller("LoginController", function LoginController($scope, $rootScope, $
 						'Content-Type': 'application/json'
 					},
 					dataType: 'JSON'
-				}).then(function(res) {
+				}).then(function (res) {
 					console.log(res)
 					$rootScope.oauth.access_token = res.data.access_token;
 					$rootScope.oauth.refresh_token = res.data.refresh_token;
@@ -43,6 +44,12 @@ app.controller("LoginController", function LoginController($scope, $rootScope, $
 		} else {
 			localStorage.setItem('domain', $scope.domain);
 			window.location.href = 'https://' + $scope.domain + $rootScope.oauth.authUrl + '?client_id=' + $rootScope.oauth.app_id + '&scope=' + $rootScope.oauth.scope + '&redirect_uri=' + $rootScope.oauth.redirect_uri;
+		}
+	}
+
+	if ($scope.domain == localStorage.getItem('domain') && $rootScope.oauth.auth_id) {
+		if ($rootScope.oauth.access_token && $rootScope.oauth.access_token.length !== 0) {
+			$scope.doLogin();
 		}
 	}
 });
