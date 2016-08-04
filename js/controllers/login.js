@@ -7,6 +7,10 @@ app.controller("LoginController", function LoginController($scope, $rootScope, $
 				ApiFactory.getEndpoint("stores", { fields: "name,domain_name"}, true).then(function (data) {
 					console.log(data);
 					$rootScope.authenticated = true;
+					for(var i in data.stores){
+						if (data.stores[i].domain == $rootScope.domain)
+							$rootScope.storeName = data.stores[i].name;
+					}
 					$location.path("/")
 				});
 			} else {
@@ -36,6 +40,10 @@ app.controller("LoginController", function LoginController($scope, $rootScope, $
 
 					ApiFactory.getEndpoint("stores", { fields: "name,domain_name"}, true).then(function (data) {
 						console.log(data);
+						for(var i in data.stores){
+							if (data.stores[i].domain == $rootScope.domain)
+								$rootScope.storeName = data.stores[i].name;
+						}
 					});
 
 					localStorage.setItem('access_token', $rootScope.oauth.access_token);
