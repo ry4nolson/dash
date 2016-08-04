@@ -34,6 +34,10 @@ app.controller("LoginController", function LoginController($scope, $rootScope, $
 					$rootScope.oauth.access_token = res.data.access_token;
 					$rootScope.oauth.refresh_token = res.data.refresh_token;
 
+					ApiFactory.getEndpoint("stores", null, true).then(function (data) {
+						console.log(data);
+					});
+
 					localStorage.setItem('access_token', $rootScope.oauth.access_token);
 					localStorage.setItem('refresh_token', $rootScope.oauth.refresh_token);
 					localStorage.setItem('signature', $rootScope.oauth.signature);
