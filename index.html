@@ -54,15 +54,18 @@
         <li><a href="#coupons"><span class="glyphicon glyphicon-bullhorn" aria-hidden="true"></span></a></li>
         <li><a href="#/orderitems"><span class="glyphicon glyphicon-gift" aria-hidden="true"></span></a></li>
         <li><a href="#/login" ng-click="doLogout()"><span class="glyphicon glyphicon-log-out" aria-hidden="true"></span></a></li>
+        <li><span class="badge">{{ requestCount }}</span></li>
       </ul>
     </div>
     <div class="col-sm-8 col-sm-offset-2">
       
       <div class="text-center" style="padding:10px 0;">
-        {{ requestCount }}<br>
+        <strong>{{ storeName }}</strong><br>
         <input type="date" ng-model="date">
+        <span ng-if="home">
         vs.
         <input type="date" ng-model="compareDate">
+        </span>
       </div>
       <div ng-view class="main fade"></div>
     </div>

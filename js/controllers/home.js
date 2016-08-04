@@ -1,6 +1,6 @@
 app.controller("HomeController", function HomeController($scope, $rootScope, OrdersFactory, OrderItemsFactory, CustomersFactory) {
 	$rootScope.currentController = this;
-
+	$rootScope.home = true;
 	var exports = {
 		loadData: function () {
 			OrdersFactory.getOrders().then(function (data) {

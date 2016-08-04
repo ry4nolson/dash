@@ -4,7 +4,7 @@ app.controller("LoginController", function LoginController($scope, $rootScope, $
 	$scope.doLogin = function () {
 		if ($scope.domain == localStorage.getItem('domain') && $rootScope.oauth.auth_id) {
 			if ($rootScope.oauth.access_token && $rootScope.oauth.access_token.length !== 0) {
-				ApiFactory.getEndpoint("stores", null, true).then(function (data) {
+				ApiFactory.getEndpoint("stores", { fields: "name,domain_name"}, true).then(function (data) {
 					console.log(data);
 					$rootScope.authenticated = true;
 					$location.path("/")
@@ -34,7 +34,7 @@ app.controller("LoginController", function LoginController($scope, $rootScope, $
 					$rootScope.oauth.access_token = res.data.access_token;
 					$rootScope.oauth.refresh_token = res.data.refresh_token;
 
-					ApiFactory.getEndpoint("stores", null, true).then(function (data) {
+					ApiFactory.getEndpoint("stores", { fields: "name,domain_name"}, true).then(function (data) {
 						console.log(data);
 					});
 

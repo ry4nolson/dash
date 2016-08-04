@@ -18,7 +18,6 @@ var app = angular.module('mobileDash', [
     client_id: localStorage.getItem('oauth_client_id'),
     secret: localStorage.getItem('oauth_secret')
   }
-
   
   $rootScope.location = $location
   var date = new Date();
@@ -60,6 +59,7 @@ var app = angular.module('mobileDash', [
 
   $rootScope.$on("$routeChangeStart", function(){
     $rootScope.requestCount = 0;
+    $rootScope.home = false;
   });
 
   $rootScope.$watch("date", function(){
