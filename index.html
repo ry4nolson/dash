@@ -53,6 +53,7 @@
         <li><a href="#/customers"><span class="glyphicon glyphicon-user" aria-hidden="true"></span></a></li>
         <li><a href="#coupons"><span class="glyphicon glyphicon-bullhorn" aria-hidden="true"></span></a></li>
         <li><a href="#/orderitems"><span class="glyphicon glyphicon-gift" aria-hidden="true"></span></a></li>
+        <li><a href="#" ng-click="doLogout()"><span class="glyphicon glyphicon-log-out" aria-hidden="true"></span></a></li>
       </ul>
     </div>
     <div class="col-sm-8 col-sm-offset-2">
@@ -64,9 +65,6 @@
         <input type="date" ng-model="compareDate">
       </div>
       <div ng-view class="main fade"></div>
-    </div>
-    <div class="text-center">
-      <button class="btn btn-warning" ng-click="doLogout()">Logout</button>
     </div>
   </div>
 </body>
