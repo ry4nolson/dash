@@ -101,7 +101,21 @@ var app = angular.module('mobileDash', [
       localStorage.clear();
       $rootScope.domain = "";
       $rootScope.apiKey = "";
-      $rootScope.oauth.authenticated = false;
+      $rootScope.oauth = {
+        authenticated: false,
+        domain: null,
+        authUrl: '/api/oauth',
+        app_id: 'dbe3478d-c559-4f93-b686-532bbe2bdffb',
+        scope: 'read_people,read_orders,read_catalog,read_marketing',
+        redirect_uri: encodeURIComponent('https://mobiledash.co/auth.html'),
+        refresh_token: null,
+        access_token: null,
+        signature: null,
+        auth_id: null,
+        code: null,
+        client_id: null,
+        secret: null
+      }
       $location.path("/login");
     };
 
