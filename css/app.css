@@ -27,7 +27,7 @@ body, html { min-height:100%; }
     margin:0;
     padding:0;
 }
-.icon-bar li { display:table-cell; padding:0;}
+.icon-bar li { display:table-cell; padding:0; float:none; }
 .icon-bar li a {
     padding:15px;
     display: inline-block;
