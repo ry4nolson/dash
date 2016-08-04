@@ -8,7 +8,7 @@ app.controller("LoginController", function LoginController($scope, $rootScope, $
 					console.log(data);
 					$rootScope.authenticated = true;
 					for(var i in data.stores){
-						if (data.stores[i].domain_name == $rootScope.domain)
+						if (data.stores[i].domain_name == $rootScope.oauth.domain)
 							$rootScope.storeName = data.stores[i].name;
 					}
 					$location.path("/")
@@ -41,7 +41,7 @@ app.controller("LoginController", function LoginController($scope, $rootScope, $
 					ApiFactory.getEndpoint("stores", { fields: "name,domain_name"}, true).then(function (data) {
 						console.log(data);
 						for(var i in data.stores){
-							if (data.stores[i].domain_name == $rootScope.domain)
+							if (data.stores[i].domain_name == $rootScope.oauth.domain)
 								$rootScope.storeName = data.stores[i].name;
 						}
 					});
