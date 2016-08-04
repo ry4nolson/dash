@@ -62,7 +62,7 @@ var app = angular.module('mobileDash', [
     $rootScope.now.setHours(now.getHours());
     $rootScope.now.setMinutes(now.getMinutes());
     $rootScope.now.setMilliseconds(now.getMilliseconds());
-    $rootScope.endDay.setTime(setDateTime(date, 23, 59, 59, 59));
+    $rootScope.endDay.setTime(Utility.setDateTime(date, 23, 59, 59, 59));
     $rootScope.now.setHours(now.getHours());
     $rootScope.now.setMinutes(now.getMinutes());
     console.log($rootScope.date, $rootScope.compareDate);
