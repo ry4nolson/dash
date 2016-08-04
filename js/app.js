@@ -109,11 +109,7 @@ var app = angular.module('mobileDash', [
 		if (!$rootScope.oauth.authenticated){
 			$location.path("/login");
 		}
-
   });
-
-
-
 }).filter("orderObjectBy", function () {
   return function (items, field, reverse) {
     var filtered = [];
