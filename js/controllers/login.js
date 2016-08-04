@@ -15,7 +15,8 @@ app.controller("LoginController", function LoginController($scope, $rootScope, $
 				});
 			} else {
 				$rootScope.authenticated = true;
-
+				$scope.showLoading = true;
+				
         var sha = new jsSHA('SHA-256', 'TEXT');
         console.log($rootScope.oauth);
         sha.update(($rootScope.oauth.secret + $rootScope.oauth.code + $rootScope.oauth.client_id + $rootScope.oauth.scope + decodeURIComponent($rootScope.oauth.redirect_uri)).toLowerCase());
