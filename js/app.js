@@ -6,7 +6,6 @@ var app = angular.module('mobileDash', [
   $rootScope.oauth = {
     authenticated: false,
     domain: localStorage.getItem('domain'),
-    authUrl: '/api/oauth',
     app_id: 'dbe3478d-c559-4f93-b686-532bbe2bdffb',
     scope: 'read_people,read_orders,read_catalog,read_marketing,system',
     redirect_uri: encodeURIComponent('https://mobiledash.co/auth.html'),
@@ -18,7 +17,7 @@ var app = angular.module('mobileDash', [
     client_id: localStorage.getItem('oauth_client_id'),
     secret: localStorage.getItem('oauth_secret')
   }
-  
+
   $rootScope.location = $location
   var date = new Date();
   var now = new Date();
@@ -27,7 +26,7 @@ var app = angular.module('mobileDash', [
 
   $rootScope.oauth.authenticated = false;
 
-  function setDateTime(date, hours, minutes, seconds, milliseconds){
+  function setDateTime(date, hours, minutes, seconds, milliseconds) {
     var newDate = new Date();
     newDate.setTime(date.getTime());
     newDate.setHours(hours);
@@ -37,11 +36,11 @@ var app = angular.module('mobileDash', [
     return new Date(newDate.getTime());
   }
 
-  date.setTime(setDateTime(date, 0,0,0,0));
-  endDay.setTime(setDateTime(endDay, 23,59,59,50));
+  date.setTime(setDateTime(date, 0, 0, 0, 0));
+  endDay.setTime(setDateTime(endDay, 23, 59, 59, 50));
   console.log(date, endDay);
 
-  var dayOffset = (24*60*60*1000);
+  var dayOffset = (24 * 60 * 60 * 1000);
   $rootScope.dayOffset = dayOffset;
 
   var compareDate = new Date();
@@ -57,15 +56,15 @@ var app = angular.module('mobileDash', [
 
   $animate.enabled(true);
 
-  $rootScope.$on("$routeChangeStart", function(){
+  $rootScope.$on("$routeChangeStart", function () {
     $rootScope.requestCount = 0;
     $rootScope.home = false;
   });
 
-  $rootScope.$watch("date", function(){
+  $rootScope.$watch("date", function () {
     var now = new Date();
     var date = new Date($rootScope.date.getTime());
-    
+
     $rootScope.requestCount = 0;
     $rootScope.compareDate.setTime(date.getTime() - dayOffset);
     // this is hacky in order to get the compare input to update.
@@ -75,16 +74,16 @@ var app = angular.module('mobileDash', [
     $rootScope.now.setHours(now.getHours());
     $rootScope.now.setMinutes(now.getMinutes());
     $rootScope.now.setMilliseconds(now.getMilliseconds());
-    $rootScope.endDay.setTime(setDateTime(date, 23,59,59,59));
+    $rootScope.endDay.setTime(setDateTime(date, 23, 59, 59, 59));
     //$rootScope.endDay.setTime(setDateTime($rootScope.endDay, 23, 59, 59, 59));
     console.log($rootScope.now);
     $rootScope.now.setHours(now.getHours());
     $rootScope.now.setMinutes(now.getMinutes());
     console.log($rootScope.date, $rootScope.compareDate);
-    
+
     $route.reload();
 
-    $rootScope.$watch("compareDate", function(){
+    $rootScope.$watch("compareDate", function () {
       var now = new Date();
       $rootScope.compareDateNow = new Date($rootScope.compareDate.getTime());
       $rootScope.compareDateNow.setHours(now.getHours());
@@ -96,36 +95,36 @@ var app = angular.module('mobileDash', [
       $route.reload();
 
     });
-
-    $rootScope.doLogout = function() {
-      localStorage.clear();
-      window.location.reload();
-      // localStorage.clear();
-      // $rootScope.domain = "";
-      // $rootScope.apiKey = "";
-      // $rootScope.storeName = "";
-      // $rootScope.oauth = {
-      //   authenticated: false,
-      //   domain: null,
-      //   authUrl: '/api/oauth',
-      //   app_id: 'dbe3478d-c559-4f93-b686-532bbe2bdffb',
-      //   scope: 'read_people,read_orders,read_catalog,read_marketing',
-      //   redirect_uri: encodeURIComponent('https://mobiledash.co/auth.html'),
-      //   refresh_token: null,
-      //   access_token: null,
-      //   signature: null,
-      //   auth_id: null,
-      //   code: null,
-      //   client_id: null,
-      //   secret: null
-      // }
-      // $location.path("/login");
-    };
-
-		if (!$rootScope.oauth.authenticated){
-			$location.path("/login");
-		}
   });
+
+  $rootScope.doLogout = function () {
+    localStorage.clear();
+    window.location.reload();
+    // localStorage.clear();
+    // $rootScope.domain = "";
+    // $rootScope.apiKey = "";
+    // $rootScope.storeName = "";
+    // $rootScope.oauth = {
+    //   authenticated: false,
+    //   domain: null,
+    //   authUrl: '/api/oauth',
+    //   app_id: 'dbe3478d-c559-4f93-b686-532bbe2bdffb',
+    //   scope: 'read_people,read_orders,read_catalog,read_marketing',
+    //   redirect_uri: encodeURIComponent('https://mobiledash.co/auth.html'),
+    //   refresh_token: null,
+    //   access_token: null,
+    //   signature: null,
+    //   auth_id: null,
+    //   code: null,
+    //   client_id: null,
+    //   secret: null
+    // }
+    // $location.path("/login");
+  };
+
+  if (!$rootScope.oauth.authenticated) {
+    $location.path("/login");
+  }
 }).filter("orderObjectBy", function () {
   return function (items, field, reverse) {
     var filtered = [];
