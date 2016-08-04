@@ -15,10 +15,10 @@
         <tr ng-repeat="customer in customers | orderObjectBy: 'total_value': true">
           <td><a href="#/customer/{{ customer.id }}">{{ customer.first_name }} {{ customer.last_name }}</a></td>
           <td>{{ customer.order_count }}
-            <img src="ellipsis.gif" ng-if="customer.order_count == undefined">
+            <img src="images/elipsis.gif" ng-if="customer.order_count == undefined">
           </td>
           <td>{{ customer.total_value ? "$" + customer.total_value.toFixed(2) : "" }}
-            <img src="ellipsis.gif" ng-if="customer.total_value == undefined">
+            <img src="images/elipsis.gif" ng-if="customer.total_value == undefined">
           </td>
         </tr>
       </tbody>

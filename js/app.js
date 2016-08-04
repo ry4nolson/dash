@@ -3,13 +3,20 @@ var app = angular.module('mobileDash', [
   'ngAnimate',
   'angular-loading-bar'
 ]).run(function ($rootScope, $route, $location, $animate, Utility) {
+
+  function getRedirectUrl(){
+    if (location.host.indexOf("localhost") > -1)
+      return "http://localhost:8000/auth.html";
+    return "https://mobiledash.co/auth.html";
+  }
+
   $rootScope.oauth = {
     authenticated: false,
     domain: localStorage.getItem('domain'),
     authUrl: '/api/oauth',
     app_id: 'dbe3478d-c559-4f93-b686-532bbe2bdffb',
     scope: 'read_people,read_orders,read_catalog,read_marketing,system',
-    redirect_uri: encodeURIComponent('https://mobiledash.co/auth.html'),
+    redirect_uri: encodeURIComponent(getRedirectUrl()),
     refresh_token: localStorage.getItem('refresh_token'),
     access_token: localStorage.getItem('access_token'),
     signature: localStorage.getItem('signature'),
@@ -18,7 +25,6 @@ var app = angular.module('mobileDash', [
     client_id: localStorage.getItem('oauth_client_id'),
     secret: localStorage.getItem('oauth_secret')
   }
-
   $rootScope.location = $location
   var date = new Date();
   var now = new Date();
