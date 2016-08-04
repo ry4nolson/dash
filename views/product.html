@@ -20,7 +20,7 @@
 					<td>{{ totalItems(order.items) }}</td>
 					<td>${{ order.grand_total.toFixed(2) }}</td>
 					<td>
-						<a href="#/customers/{{order.customer_id}}">{{ order.customer.first_name }} {{ order.customer.last_name }} ({{ order.customer_id }})</a>
+						<a href="#/customers/{{order.customer_id}}">{{ order.customer_first_name }} {{ order.customer_last_name }} ({{ order.customer_id }})</a>
 					</td>
 					<td>{{ order.customer.order_count }}</td>
 				</tr>

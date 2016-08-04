@@ -2,11 +2,15 @@ app.controller("LoginController", function LoginController($scope, $rootScope, $
 	$scope.domain = $rootScope.oauth.domain;
 
 	$scope.doLogin = function () {
+		// if (localStorage.getItem("authenticated"))
+		// 	return;
+
 		if ($scope.domain == localStorage.getItem('domain') && $rootScope.oauth.auth_id) {
 			if ($rootScope.oauth.access_token && $rootScope.oauth.access_token.length !== 0) {
 				ApiFactory.getEndpoint("stores", { fields: "name,domain_name"}, true).then(function (data) {
 					console.log(data);
 					$rootScope.authenticated = true;
+					localStorage.setItem("authenticated", $rootScope.oauth.authenticated);
 					for(var i in data.stores){
 						if (data.stores[i].domain_name == $rootScope.oauth.domain)
 							$rootScope.storeName = data.stores[i].name;
@@ -16,6 +20,8 @@ app.controller("LoginController", function LoginController($scope, $rootScope, $
 			} else {
 				$rootScope.authenticated = true;
 				$scope.showLoading = true;
+
+				localStorage.setItem("authenticated", $rootScope.oauth.authenticated);
 				
         var sha = new jsSHA('SHA-256', 'TEXT');
         console.log($rootScope.oauth);

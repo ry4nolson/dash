@@ -1,4 +1,4 @@
-app.controller("ProductController", function ProductController($routeParams, $scope, ApiFactory, OrderItemsFactory, OrdersFactory){
+app.controller("ProductController", function ProductController($routeParams, $scope, ApiFactory, OrderItemsFactory, OrdersFactory, CustomersFactory){
 	ApiFactory.getEndpoint("/products/" + $routeParams.id).then(function(data){
 		$scope.product = data;
 		console.log(data);
@@ -11,8 +11,10 @@ app.controller("ProductController", function ProductController($routeParams, $sc
 				if (pics[pic].is_primary)
 					primary = pics[pic];
 			}
-			$scope.itemPhoto = ApiFactory.domain + "/resize" + primary.image_file + "?bw=50&lr=t";
+			$scope.itemPhoto = "https://" + ApiFactory.domain + "/resize" + primary.image_file + "?bw=50&lr=t";
 		});
+
+		$scope.totalItems = OrdersFactory.totalItems;
 
 		OrderItemsFactory.getOrderItemsForProduct($routeParams.id).then(function(data){
 			var items = data.items;
@@ -34,9 +36,14 @@ app.controller("ProductController", function ProductController($routeParams, $sc
 				OrdersFactory.getOrdersByIDs(orderIds[id].join("+OR+")).then(function(data){
 					var orders = data.orders;
 					for (var order in orders){
-						$scope.orders[orders[order].id] = orders[order];
+						var order = orders[order];
+						$scope.orders[order.id] = order;
+
+						// CustomersFactory.getCustomer(order.customer_id).then(function(data){
+						// 	$scope.orders[order.id].customer_first_name = data.first_name;
+						// 	$scope.orders[order.id].customer_last_name = data.last_name;
+						// })
 					}
-					console.log($scope.orders);
 				});
 			}
 		});
