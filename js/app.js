@@ -2,7 +2,7 @@ var app = angular.module('mobileDash', [
   'ngRoute',
   'ngAnimate',
   'angular-loading-bar'
-]).run(function ($rootScope, $route, $location, $animate) {
+]).run(function ($rootScope, $route, $location, $animate, Utility) {
   $rootScope.oauth = {
     authenticated: false,
     domain: localStorage.getItem('domain'),
@@ -27,27 +27,14 @@ var app = angular.module('mobileDash', [
 
   $rootScope.oauth.authenticated = false;
 
-  function setDateTime(date, hours, minutes, seconds, milliseconds) {
-    var newDate = new Date();
-    newDate.setTime(date.getTime());
-    newDate.setHours(hours);
-    newDate.setMinutes(minutes);
-    newDate.setSeconds(seconds);
-    newDate.setMilliseconds(milliseconds);
-    return new Date(newDate.getTime());
-  }
-
-  date.setTime(setDateTime(date, 0, 0, 0, 0));
-  endDay.setTime(setDateTime(endDay, 23, 59, 59, 50));
-  console.log(date, endDay);
+  date.setTime(Utility.setDateTime(date, 0, 0, 0, 0));
+  endDay.setTime(Utility.setDateTime(endDay, 23, 59, 59, 50));
 
   var dayOffset = (24 * 60 * 60 * 1000);
   $rootScope.dayOffset = dayOffset;
 
   var compareDate = new Date();
-  compareDate.setTime(date.getTime() - dayOffset)
-
-  console.log(date, compareDate);
+  compareDate.setTime(date.getTime() - dayOffset);
 
   $rootScope.date = date;
   $rootScope.endDay = endDay;
@@ -76,12 +63,9 @@ var app = angular.module('mobileDash', [
     $rootScope.now.setMinutes(now.getMinutes());
     $rootScope.now.setMilliseconds(now.getMilliseconds());
     $rootScope.endDay.setTime(setDateTime(date, 23, 59, 59, 59));
-    //$rootScope.endDay.setTime(setDateTime($rootScope.endDay, 23, 59, 59, 59));
-    console.log($rootScope.now);
     $rootScope.now.setHours(now.getHours());
     $rootScope.now.setMinutes(now.getMinutes());
     console.log($rootScope.date, $rootScope.compareDate);
-
     $route.reload();
 
     $rootScope.$watch("compareDate", function () {
@@ -89,9 +73,6 @@ var app = angular.module('mobileDash', [
       $rootScope.compareDateNow = new Date($rootScope.compareDate.getTime());
       $rootScope.compareDateNow.setHours(now.getHours());
       $rootScope.compareDateNow.setMinutes(now.getMinutes());
-      console.log($rootScope.compareDateNow);
-
-      console.log($rootScope.date, $rootScope.compareDate);
 
       $route.reload();
 
@@ -101,26 +82,6 @@ var app = angular.module('mobileDash', [
   $rootScope.doLogout = function () {
     localStorage.clear();
     window.location.reload();
-    // localStorage.clear();
-    // $rootScope.domain = "";
-    // $rootScope.apiKey = "";
-    // $rootScope.storeName = "";
-    // $rootScope.oauth = {
-    //   authenticated: false,
-    //   domain: null,
-    //   authUrl: '/api/oauth',
-    //   app_id: 'dbe3478d-c559-4f93-b686-532bbe2bdffb',
-    //   scope: 'read_people,read_orders,read_catalog,read_marketing',
-    //   redirect_uri: encodeURIComponent('https://mobiledash.co/auth.html'),
-    //   refresh_token: null,
-    //   access_token: null,
-    //   signature: null,
-    //   auth_id: null,
-    //   code: null,
-    //   client_id: null,
-    //   secret: null
-    // }
-    // $location.path("/login");
   };
 
   if (!$rootScope.oauth.authenticated) {
