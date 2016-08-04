@@ -6,6 +6,7 @@ var app = angular.module('mobileDash', [
   $rootScope.oauth = {
     authenticated: false,
     domain: localStorage.getItem('domain'),
+    authUrl: '/api/oauth',
     app_id: 'dbe3478d-c559-4f93-b686-532bbe2bdffb',
     scope: 'read_people,read_orders,read_catalog,read_marketing,system',
     redirect_uri: encodeURIComponent('https://mobiledash.co/auth.html'),
