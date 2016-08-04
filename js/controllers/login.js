@@ -48,8 +48,6 @@ app.controller("LoginController", function LoginController($scope, $rootScope, $
 	}
 
 	if ($scope.domain == localStorage.getItem('domain') && $rootScope.oauth.auth_id) {
-		if ($rootScope.oauth.access_token && $rootScope.oauth.access_token.length !== 0) {
-			$scope.doLogin();
-		}
+		$scope.doLogin();
 	}
 });
