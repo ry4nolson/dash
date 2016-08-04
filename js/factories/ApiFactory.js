@@ -50,8 +50,8 @@ angular.module("mobileDash")
 
 						if (status == 429)
 							setTimeout(query, 1000);
-						else
-							deferred.resolve(data);
+						else if (status == 401)
+							$location.path("/login");
 					});
 			}
 
