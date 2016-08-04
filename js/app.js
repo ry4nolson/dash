@@ -101,6 +101,7 @@ var app = angular.module('mobileDash', [
       localStorage.clear();
       $rootScope.domain = "";
       $rootScope.apiKey = "";
+      $rootScope.storeName = "";
       $rootScope.oauth = {
         authenticated: false,
         domain: null,
