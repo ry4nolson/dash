@@ -1,9 +1,7 @@
 angular.module("mobileDash")
 	.factory("ApiFactory", function ApiFactory($q, $http, $rootScope, $location) {
     'use strict';
-
-
-
+		
     var exports = {};
 
     exports.data = null;

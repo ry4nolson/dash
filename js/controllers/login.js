@@ -58,6 +58,8 @@ app.controller("LoginController", function LoginController($scope, $rootScope, $
 			localStorage.setItem('domain', $scope.domain);
 			window.location.href = 'https://' + $scope.domain + $rootScope.oauth.authUrl + '?client_id=' + $rootScope.oauth.app_id + '&scope=' + $rootScope.oauth.scope + '&redirect_uri=' + $rootScope.oauth.redirect_uri;
 		}
+
+		localStorage.setItem("authenticated", $rootScope.oauth.authenticated);
 	}
 
 	if ($scope.domain == localStorage.getItem('domain') && $rootScope.oauth.auth_id) {

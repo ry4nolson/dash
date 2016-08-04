@@ -13,7 +13,7 @@
       </thead>
       <tbody>
         <tr ng-repeat="customer in customers | orderObjectBy: 'total_value': true">
-          <td><a href="#/customer/{{ customer.id }}">{{ customer.first_name }} {{ customer.last_name }}</a></td>
+          <td><a href="#/customers/{{ customer.id }}">{{ customer.first_name }} {{ customer.last_name }}</a></td>
           <td>{{ customer.order_count }}
             <img src="images/ellipsis.gif" ng-if="customer.order_count == undefined">
           </td>

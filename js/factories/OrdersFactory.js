@@ -58,7 +58,7 @@ angular.module("mobileDash")
 				return {
 					"ordered_at": "gte:" + $rootScope.date.toISOString() + "+AND+lt:" + $rootScope.endDay.toISOString(),
 					"order_status_id": "not:4+AND+not:5+AND+not:6+AND+not:15+AND+not:16",
-					"count": 100000,
+					"count": 10000,
 					"expand": "items"
 				};
 			}

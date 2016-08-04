@@ -11,7 +11,7 @@ var app = angular.module('mobileDash', [
   }
 
   $rootScope.oauth = {
-    authenticated: false,
+    authenticated: localStorage.getItem("authenticated"),
     domain: localStorage.getItem('domain'),
     authUrl: '/api/oauth',
     app_id: 'dbe3478d-c559-4f93-b686-532bbe2bdffb',
