@@ -15,7 +15,12 @@ app.controller("LoginController", function LoginController($scope, $rootScope, $
 						if (data.stores[i].domain_name == $rootScope.oauth.domain)
 							$rootScope.storeName = data.stores[i].name;
 					}
-					$location.path("/")
+					
+					if ($location.search().rdr !== '/login') {
+						$location.path($location.search().rdr).search('rdr', null);
+					} else {
+						$location.path("/").search('rdr', null);
+					}
 				});
 			} else {
 				$rootScope.authenticated = true;
@@ -57,7 +62,11 @@ app.controller("LoginController", function LoginController($scope, $rootScope, $
 					localStorage.setItem('refresh_token', $rootScope.oauth.refresh_token);
 					localStorage.setItem('signature', $rootScope.oauth.signature);
 
-					$location.path("/")
+					if ($location.search().rdr !== '/login') {
+						$location.path($location.search().rdr).search('rdr', null);
+					} else {
+						$location.path("/").search('rdr', null);
+					}
 				});
 			}
 		} else {

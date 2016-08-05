@@ -91,7 +91,8 @@ var app = angular.module('mobileDash', [
   };
 
   if (!$rootScope.oauth.authenticated) {
-    $location.path("/login");
+    var rdr = $location.path();
+    $location.path("/login").search('rdr', rdr);
   }
 }).filter("orderObjectBy", function () {
   return function (items, field, reverse) {
