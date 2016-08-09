@@ -1,0 +1,23 @@
+<div class="panel panel-default">
+	<div class="panel-heading">
+		<back-link></back-link>
+		{{ reviews.length }} review(s) today
+	</div>
+	<div class="panel-body">
+
+
+
+		<div class="panel panel-default" ng-repeat="review in reviews | orderObjectBy: 'created_at': true">
+			<div class="panel-heading">
+        
+        <span ng-bind-html="review.stars"></span> | 
+        <strong>{{ review.title ? review.title : "untitled review" }}</strong> by {{ review.author_display_name }}
+			</div>
+      <div class="panel-body">
+				{{ review.body }}
+			</div>
+
+		</div>
+
+	</div>
+</div>

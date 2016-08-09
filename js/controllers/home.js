@@ -1,4 +1,4 @@
-app.controller("HomeController", function HomeController($scope, $rootScope, OrdersFactory, OrderItemsFactory, CustomersFactory) {
+app.controller("HomeController", function HomeController($scope, $rootScope, OrdersFactory, OrderItemsFactory, CustomersFactory, ContentFactory) {
 	$rootScope.currentController = this;
 	$rootScope.home = true;
 	var exports = {
@@ -73,6 +73,10 @@ app.controller("HomeController", function HomeController($scope, $rootScope, Ord
 					else $scope.repeatCustomers++;
 				});
 			}
+			
+			ContentFactory.getReviews().then(function(data){
+				$scope.reviews = data.product_reviews;
+			})
 		}
 	}
 	exports.loadData();

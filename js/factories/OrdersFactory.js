@@ -1,5 +1,4 @@
-angular.module("mobileDash")
-	.factory("OrdersFactory", function OrderFactory($rootScope, ApiFactory) {
+app.factory("OrdersFactory", function OrderFactory($rootScope, ApiFactory) {
 		return {
 			getOrders: function (params) {
 				if (!params) {
