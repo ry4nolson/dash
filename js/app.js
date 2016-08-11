@@ -86,7 +86,11 @@ var app = angular.module('mobileDash', [
   });
 
   $rootScope.doLogout = function () {
-    localStorage.clear();
+    for (var key in localStorage){
+      if (key != "domain"){
+        delete localStorage[key];
+      }
+    }
     window.location.reload();
   };
 
