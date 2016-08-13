@@ -1,7 +1,7 @@
 angular.module("mobileDash")
 	.factory("ApiFactory", function ApiFactory($q, $http, $rootScope, $location) {
     'use strict';
-		
+
     var exports = {};
 
     exports.data = null;
@@ -48,8 +48,11 @@ angular.module("mobileDash")
 
 						if (status == 429)
 							setTimeout(query, 1000);
-						else if (status == 401)
-							$location.path("/login");
+						else if (status == 401){
+							$rootScope.doLogout();
+							$rootScope.doLogin();
+							//$location.path("/login"):
+						}
 					});
 			}
 

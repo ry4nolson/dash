@@ -1,7 +1,7 @@
 app.controller("LoginController", function LoginController($scope, $rootScope, $location, ApiFactory, $http) {
 	$scope.domain = $rootScope.oauth.domain;
 
-	$scope.doLogin = function () {
+	$rootScope.doLogin = function () {
 		// if (localStorage.getItem("authenticated"))
 		// 	return;
 
@@ -78,6 +78,6 @@ app.controller("LoginController", function LoginController($scope, $rootScope, $
 	}
 
 	if ($scope.domain == localStorage.getItem('domain') && $rootScope.oauth.auth_id) {
-		$scope.doLogin();
+		$rootScope.doLogin();
 	}
 });
