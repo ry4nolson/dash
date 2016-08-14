@@ -10,13 +10,13 @@ app.factory("OrdersFactory", function OrderFactory($rootScope, ApiFactory) {
 				var params = this.getDefaultOrderParams();
 
 				var topEnd = new Date();
-				topEnd.setTime($rootScope.compareDate);
+				topEnd.setTime($rootScope.comparedate);
 				topEnd.setHours(24);
 				topEnd.setMinutes(0);
 				topEnd.setSeconds(0);
 				topEnd.setMilliseconds(0);
 
-				params.ordered_at = "gte:" + $rootScope.compareDate.toISOString() + "+AND+lt:" + topEnd.toISOString();
+				params.ordered_at = "gte:" + $rootScope.comparedate.toISOString() + "+AND+lt:" + topEnd.toISOString();
 				
 				return ApiFactory.getEndpoint("orders", params);
 			},

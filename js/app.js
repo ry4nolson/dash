@@ -2,9 +2,11 @@ var app = angular.module('mobileDash', [
   'ngRoute',
   'ngAnimate',
   'angular-loading-bar'
-]).run(function ($rootScope, $route, $location, $animate, Utility) {
+]);
 
-  function getRedirectUrl(){
+app.run(function ($rootScope, $route, $location, $animate, Utility) {
+
+  function getRedirectUrl() {
     if (location.host.indexOf("localhost") > -1)
       return "http://localhost:8000/auth.html";
     return "https://mobiledash.co/auth.html";
@@ -25,6 +27,7 @@ var app = angular.module('mobileDash', [
     client_id: localStorage.getItem('oauth_client_id'),
     secret: localStorage.getItem('oauth_secret')
   }
+
   $rootScope.location = $location
   var date = new Date();
   var now = new Date();
@@ -39,12 +42,12 @@ var app = angular.module('mobileDash', [
   var dayOffset = (24 * 60 * 60 * 1000);
   $rootScope.dayOffset = dayOffset;
 
-  var compareDate = new Date();
-  compareDate.setTime(date.getTime() - dayOffset);
+  var comparedate = new Date();
+  comparedate.setTime(date.getTime() - dayOffset);
 
   $rootScope.date = date;
   $rootScope.endDay = endDay;
-  $rootScope.compareDate = compareDate;
+  $rootScope.comparedate = comparedate;
   $rootScope.comapreDateNow = new Date(now.getDate() - 1);
   $rootScope.now = now;
 
@@ -60,10 +63,10 @@ var app = angular.module('mobileDash', [
     var date = new Date($rootScope.date.getTime());
 
     $rootScope.requestCount = 0;
-    $rootScope.compareDate.setTime(date.getTime() - dayOffset);
+    $rootScope.comparedate.setTime(date.getTime() - dayOffset);
     // this is hacky in order to get the compare input to update.
-    var compareDate = new Date($rootScope.compareDate.getTime());
-    $rootScope.compareDate = compareDate;
+    var comparedate = new Date($rootScope.comparedate.getTime());
+    $rootScope.comparedate = comparedate;
     $rootScope.now.setTime(date.getTime());
     $rootScope.now.setHours(now.getHours());
     $rootScope.now.setMinutes(now.getMinutes());
@@ -71,23 +74,23 @@ var app = angular.module('mobileDash', [
     $rootScope.endDay.setTime(Utility.setDateTime(date, 23, 59, 59, 59));
     $rootScope.now.setHours(now.getHours());
     $rootScope.now.setMinutes(now.getMinutes());
-    console.log($rootScope.date, $rootScope.compareDate);
+    console.log($rootScope.date, $rootScope.comparedate);
     $route.reload();
+  });
 
-    $rootScope.$watch("compareDate", function () {
-      var now = new Date();
-      $rootScope.compareDateNow = new Date($rootScope.compareDate.getTime());
-      $rootScope.compareDateNow.setHours(now.getHours());
-      $rootScope.compareDateNow.setMinutes(now.getMinutes());
 
-      $route.reload();
-
-    });
+  $rootScope.$watch("comparedate", function () {
+    var now = new Date();
+    $rootScope.comparedateNow = new Date($rootScope.comparedate.getTime());
+    $rootScope.comparedateNow.setHours(now.getHours());
+    $rootScope.comparedateNow.setMinutes(now.getMinutes());
+    console.log("compare changed");
+    $route.reload();
   });
 
   $rootScope.doLogout = function () {
-    for (var key in localStorage){
-      if (key != "domain"){
+    for (var key in localStorage) {
+      if (key != "domain") {
         delete localStorage[key];
       }
     }
@@ -98,7 +101,9 @@ var app = angular.module('mobileDash', [
     var rdr = $location.path();
     $location.path("/login").search('rdr', rdr);
   }
-}).filter("orderObjectBy", function () {
+});
+
+app.filter("orderObjectBy", function () {
   return function (items, field, reverse) {
     var filtered = [];
     angular.forEach(items, function (item) {
@@ -110,7 +115,9 @@ var app = angular.module('mobileDash', [
     if (reverse) filtered.reverse();
     return filtered;
   };
-}).directive("backLink", function () {
+});
+
+app.directive("backLink", function () {
   return {
     template: "<a href=\"javascript:history.go(-1);\">&larr; back</a> | "
   };

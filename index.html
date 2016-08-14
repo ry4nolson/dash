@@ -63,10 +63,10 @@
       
       <div class="text-center" style="padding:10px 0;">
         <strong>{{ storeName }}</strong><br>
-        <input type="date" ng-model="date">
+        <input type="date" id="date1" ng-model="date">
         <span ng-if="home">
         vs.
-        <input type="date" ng-model="compareDate">
+        <input type="date" id="comparedate" ng-model="comparedate">
         </span>
       </div>
       <div ng-view class="main fade"></div>

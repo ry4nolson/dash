@@ -22,14 +22,14 @@ app.controller("HomeController", function HomeController($scope, $rootScope, Ord
 				$scope.compare_order_total_tonow = 0;
 				$scope.compare_order_count_tonow = 0;
 
-				var compareDate = $rootScope.compareDate;
-				var compareDateNow = $rootScope.compareDateNow;
+				var comparedate = $rootScope.comparedate;
+				var comparedateNow = $rootScope.comparedateNow;
 
 				for(var order in orders.orders){
 					var current = orders.orders[order];
 					var orderDate = new Date(current.ordered_at);
-					//console.log(orderDate, compareDate);
-					if (orderDate.getTime() < compareDateNow.getTime()){
+					//console.log(orderDate, comparedate);
+					if (orderDate.getTime() < comparedateNow.getTime()){
 						$scope.compare_order_count_tonow++;
 						$scope.compare_order_total_tonow += current.grand_total;
 					}
