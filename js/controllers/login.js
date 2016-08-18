@@ -7,14 +7,11 @@ app.controller("LoginController", function LoginController($scope, $rootScope, $
 
 		if ($scope.domain == localStorage.getItem('domain') && $rootScope.oauth.auth_id) {
 			if ($rootScope.oauth.access_token && $rootScope.oauth.access_token.length !== 0) {
-				ApiFactory.getEndpoint("stores", { fields: "name,domain_name"}, true).then(function (data) {
+				ApiFactory.getEndpoint("stores", {}, true).then(function (data) {
 					console.log(data);
 					$rootScope.authenticated = true;
 					localStorage.setItem("authenticated", $rootScope.oauth.authenticated);
-					for(var i in data.stores){
-						if (data.stores[i].domain_name == $rootScope.oauth.domain)
-							$rootScope.storeName = data.stores[i].name;
-					}
+					setStoreInfo(data);
 					
 					if ($location.search().rdr !== '/login') {
 						$location.path($location.search().rdr).search('rdr', null);
@@ -50,12 +47,9 @@ app.controller("LoginController", function LoginController($scope, $rootScope, $
 					$rootScope.oauth.access_token = res.data.access_token;
 					$rootScope.oauth.refresh_token = res.data.refresh_token;
 
-					ApiFactory.getEndpoint("stores", { fields: "name,domain_name"}, true).then(function (data) {
+					ApiFactory.getEndpoint("stores", {}, true).then(function (data) {
 						console.log(data);
-						for(var i in data.stores){
-							if (data.stores[i].domain_name == $rootScope.oauth.domain)
-								$rootScope.storeName = data.stores[i].name;
-						}
+						setStoreInfo(data);
 					});
 
 					localStorage.setItem('access_token', $rootScope.oauth.access_token);
@@ -79,5 +73,26 @@ app.controller("LoginController", function LoginController($scope, $rootScope, $
 
 	if ($scope.domain == localStorage.getItem('domain') && $rootScope.oauth.auth_id) {
 		$rootScope.doLogin();
+	}
+
+	function setStoreInfo(data){
+		$rootScope.stores = data.stores;
+
+		for(var i in data.stores){
+			if (checkDomain(data.stores[i].domain_name, $rootScope.oauth.domain) && !data.stores[i].is_micro_store){
+				$rootScope.storeName = data.stores[i].name;
+				$rootScope.storeid = data.stores[i].id;
+			}
+		}
+	}
+	function checkDomain(storeDomain, currentDomain){
+		//normlize domains
+		if (storeDomain.indexOf("www") != -1 && currentDomain.indexOf("www") == -1)
+			currentDomain = "www." + currentDomain;
+
+		if (storeDomain.indexOf("www") == -1 && currentDomain.indexOf("www") != -1)
+			storeDomain = "www." + storeDomain;
+
+		return currentDomain == storeDomain;
 	}
 });

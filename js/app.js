@@ -12,6 +12,8 @@ app.run(function ($rootScope, $route, $location, $animate, Utility) {
     return "https://mobiledash.co/auth.html";
   }
 
+  $rootScope.storeid = 0;
+
   $rootScope.oauth = {
     authenticated: localStorage.getItem("authenticated"),
     domain: localStorage.getItem('domain'),
@@ -88,6 +90,14 @@ app.run(function ($rootScope, $route, $location, $animate, Utility) {
     $route.reload();
   });
 
+  $rootScope.$watch("storeid", function(){
+    console.log($rootScope.storeid);
+    setTimeout(function(){
+      $("#storeDD").find("option[value=" + $rootScope.storeid +"]").prop("selected", true);
+    }, 500);
+    $route.reload();
+  });
+
   $rootScope.doLogout = function () {
     for (var key in localStorage) {
       if (key != "domain") {
@@ -120,5 +130,19 @@ app.filter("orderObjectBy", function () {
 app.directive("backLink", function () {
   return {
     template: "<a href=\"javascript:history.go(-1);\">&larr; back</a> | "
+  };
+});
+
+app.directive('convertToNumber', function() {
+  return {
+    require: 'ngModel',
+    link: function(scope, element, attrs, ngModel) {
+      ngModel.$parsers.push(function(val) {
+        return parseInt(val, 10);
+      });
+      ngModel.$formatters.push(function(val) {
+        return '' + val;
+      });
+    }
   };
 });

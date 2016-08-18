@@ -34,6 +34,9 @@ body, html { min-height:100%; }
 }
 .spacer { height:50px; }
 .main > .panel { margin:0; }
+
+select option:empty { display:none }
+
       @font-face {
         font-family: 'RobotoDraft';
         font-style: normal;
