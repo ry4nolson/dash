@@ -4,7 +4,8 @@ app.factory("ContentFactory", function ContentFactory($rootScope, ApiFactory){
   exports.getReviews = function(){
     return ApiFactory.getEndpoint("product_reviews", 
       { 
-        "created_at": "gte:" + $rootScope.date.toISOString() + "+AND+lt:" + $rootScope.endDay.toISOString()
+        "created_at": "gte:" + $rootScope.date.toISOString() + "+AND+lt:" + $rootScope.endDay.toISOString(),
+        "origin_store_id" : $rootScope.storeid
       })
   }
 

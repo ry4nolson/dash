@@ -62,15 +62,17 @@
     <div class="col-sm-8 col-sm-offset-2">
       
       <div class="text-center" style="padding:10px 0;">
-        <select id="storeDD" ng-model="$root.storeid" convert-to-number>
+        <select class="form-control" id="storeDD" ng-model="$root.storeid" convert-to-number>
           <option ng-repeat="store in $root.stores" ng-value="store.id">{{ store.name }}</option>
         </select>
-        <br>
-        <input type="date" id="date1" ng-model="date">
-        <span ng-if="home">
-        vs.
-        <input type="date" id="comparedate" ng-model="$root.comparedate">
-        </span>
+        <div class="row">
+          <div class="col-xs-6">
+            <input class="form-control" type="date" id="date" ng-model="$root.date">
+          </div>
+          <div ng-if="$root.home" class="col-xs-6">
+            <input class="form-control" type="date" id="comparedate" ng-model="$root.comparedate">
+          </div>
+        </div>
       </div>
       <div ng-view class="main fade"></div>
     </div>
