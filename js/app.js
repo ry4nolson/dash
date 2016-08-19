@@ -107,6 +107,10 @@ app.run(function ($rootScope, $route, $location, $animate, Utility) {
     window.location.reload();
   };
 
+  $rootScope.doRefresh = function(){
+    window.location.reload();
+  }
+
   if (!$rootScope.oauth.authenticated) {
     var rdr = $location.path();
     $location.path("/login").search('rdr', rdr);

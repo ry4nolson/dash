@@ -71,14 +71,17 @@ select option:empty { display:none }
       a[name] { display:block; position:relative; top:-70px; }
 
     .fade {
-        position: absolute;
-        left: 0;
-        right: 0;
-        height: 100%;
         opacity: 1;
+        margin-left:-15px;
+        margin-right:-15px;
     }
     .fade.ng-enter,
     .fade.ng-leave {
+        position: absolute;
+        left: 0;
+        right: 0;
+        margin:0;
+        height: 100%;
         -webkit-transition: all 1s ease;
         transition: all 1s ease;
     }
