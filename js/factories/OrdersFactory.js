@@ -1,4 +1,4 @@
-app.factory("OrdersFactory", function OrderFactory($rootScope, ApiFactory) {
+app.factory("OrdersFactory", function OrdersFactory($rootScope, ApiFactory) {
 		return {
 			getOrders: function (params) {
 				if (!params) {

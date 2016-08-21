@@ -61,7 +61,7 @@
     </div>
     <div class="col-sm-8 col-sm-offset-2">
       
-      <div class="text-center" style="padding:10px 0;">
+      <div ng-if="!$root.login" class="text-center" style="padding:10px 0;">
         <select class="form-control" id="storeDD" ng-model="$root.storeid" convert-to-number>
           <option ng-repeat="store in $root.stores" ng-value="store.id">{{ store.name }}</option>
         </select>

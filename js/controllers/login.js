@@ -1,6 +1,7 @@
 app.controller("LoginController", function LoginController($scope, $rootScope, $location, ApiFactory, $http) {
 	$scope.domain = $rootScope.oauth.domain;
-
+	$rootScope.login = true;
+	
 	$rootScope.doLogin = function () {
 		// if (localStorage.getItem("authenticated"))
 		// 	return;

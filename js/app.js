@@ -58,6 +58,7 @@ app.run(function ($rootScope, $route, $location, $animate, Utility) {
   $rootScope.$on("$routeChangeStart", function () {
     $rootScope.requestCount = 0;
     $rootScope.home = false;
+    $rootScope.login = false;
   });
 
   $rootScope.$watch("date", function () {
