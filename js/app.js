@@ -60,6 +60,9 @@ app.run(function ($rootScope, $route, $location, $animate, Utility) {
     $rootScope.home = false;
     $rootScope.login = false;
   });
+  $rootScope.$on("$routeChangeSuccess", function () {
+    window.scrollTo(0, 0);
+  });
 
   $rootScope.$watch("date", function () {
     var now = new Date();
