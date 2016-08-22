@@ -9,7 +9,7 @@ app.run(function ($rootScope, $route, $location, $animate, Utility) {
   function getRedirectUrl() {
     if (location.host.indexOf("localhost") > -1)
       return "http://localhost:8000/auth.html";
-    return "https://mobiledash.co/auth.html";
+    return "https://www.mobiledash.co/auth.html";
   }
 
   $rootScope.storeid = 0;
