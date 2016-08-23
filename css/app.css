@@ -20,6 +20,13 @@ body, html { min-height:100%; }
     min-height:50px;
     height:50px;
 }
+
+.navbar-inverse {
+    background-color: #0C182D;
+}
+
+.navbar-inverse .navbar-nav>li>a { color: #FFF; }
+
 .icon-bar {
     text-align:center;
     display:table;
