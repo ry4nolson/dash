@@ -47,6 +47,11 @@ app.config(function ( $routeProvider ) {
     	controller: 'ReviewsController',
     	controllerAs: 'reviews'
     })
+    .when('/marketing',{
+      templateUrl: 'views/marketing.html',
+      controller: 'MarketingController',
+      controllerAs: 'marketing'
+    })
     .otherwise({
       redirectTo: '/'
     });

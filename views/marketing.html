@@ -1,0 +1,69 @@
+<div class="panel panel-default">
+  <div class="panel-heading">
+    <back-link></back-link> Marketing
+  </div>
+  <div class="panel-body">
+    <div class="panel panel-default">
+      <div class="panel-heading">
+        Coupon Codes
+      </div>
+      <div class="panel-body">
+        <div ng-if="coupons.total == 0">
+          No coupons were used today.
+        </div>
+        <table class="items table" ng-if="coupons.total > 0">
+          <thead>
+            <tr>
+              <th>Coupon</th>
+              <th>Uses</th>
+              <th>Amount</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr ng-repeat="coupon in coupons.coupons">
+              <td>
+                {{ coupon.name }}
+              </td>
+              <td>
+                {{ coupon.uses }}
+              </td>
+              <td>
+                ${{ coupon.amount.toFixed(2) }}
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <div class="panel panel-default">
+      <div class="panel-heading">
+        Adcodes
+      </div>
+      <div class="panel-body">
+        <div ng-if="adcodes.total == 0">
+          No orders derived from adcodes today
+        </div>
+        <table class="items table" ng-if="adcodes.total > 0">
+          <thead>
+            <tr>
+              <th>Adcodes</th>
+              <th>Orders</th>
+              <th>Amount</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr ng-repeat="adcode in adcodes.adcodes">
+              <td>
+                {{ adcode.name }}
+              </td>
+              <td>
+                {{ adcode.uses }}
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+</div>

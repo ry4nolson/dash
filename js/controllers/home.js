@@ -13,6 +13,18 @@ app.controller("HomeController", function HomeController($scope, $rootScope, Ord
 				for (var orderid in $scope.orders) {
 					$scope.getCustomerData($scope.orders[orderid].customer_id);
 				}
+
+				$scope.coupons = 0;
+				$scope.adcodes = 0;
+
+				for (var order in $scope.orders){
+					if ($scope.orders[order].coupon_code != "")
+						$scope.coupons++;
+					if ($scope.orders[order].adcode != "")
+						$scope.adcodes++;
+
+				}
+
 			});
 
 			OrdersFactory.getCompareDayOrders().then(function (data) {

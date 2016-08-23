@@ -1,5 +1,4 @@
-angular.module("mobileDash")
-	.controller("OrderController", function OrderController($routeParams, $scope, OrdersFactory, CustomersFactory, AddressFactory) {
+app.controller("OrderController", function OrderController($routeParams, $scope, OrdersFactory, CustomersFactory, AddressFactory) {
 		OrdersFactory.getOrder($routeParams.id).then(function (data) {
 			var order = $scope.order = data;
 			CustomersFactory.getCustomer(order.customer_id).then(function (data) {
