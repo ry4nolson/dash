@@ -25,7 +25,13 @@ body, html { min-height:100%; }
     background-color: #0C182D;
 }
 
+
 .navbar-inverse .navbar-nav>li>a { color: #FFF; }
+
+.btn-primary {
+  background: #169DD6;
+  box-shadow: none;
+}
 
 .icon-bar {
     text-align:center;
@@ -104,3 +110,24 @@ select option:empty { display:none }
     .fade.ng-leave-active {
         opacity:0;
     }
+
+
+.panel {
+  box-shadow: none;
+}
+
+.panel-default>.panel-heading {
+  background: transparent;
+  font-size: 18px;
+  font-weight: 300;
+
+}
+
+.panel-body {
+  box-shadow: 0 0 12px 0px rgba(0,0,0,0.2)
+}
+
+label {
+  font-weight: 600;
+}
+
