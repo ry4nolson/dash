@@ -38,6 +38,8 @@
   <script src="https://cdn.jsdelivr.net/datetimepicker/0.1.30/DateTimePicker.min.js"></script>
   <script src="js/sha.js"></script>
 
+  <script async defer src="https://buttons.github.io/buttons.js"></script>
+
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootswatch/3.3.6/paper/bootstrap.min.css">
   <!--<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-material-design/0.3.0/css/material.css">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-material-design/0.3.0/css/ripples.min.css">
@@ -62,7 +64,7 @@
       </ul>
     </div>
     <div class="col-sm-8 col-sm-offset-2">
-      
+
       <div ng-if="!$root.login" class="text-center" style="padding:10px 0;">
         <select class="form-control" id="storeDD" ng-model="$root.storeid" convert-to-number>
           <option ng-repeat="store in $root.stores" ng-value="store.id">{{ store.name }}</option>
@@ -78,10 +80,30 @@
       </div>
       <div ng-view class="main fade"></div>
       <br>
-      <div class="text-center well">
+      <div class="text-center">
         {{ requestCount }} requests
         <br>
-        <a href="https://github.com/ry4nolson/dash" target="_blank">Contribute on GitHub</a>
+        <br>
+        <!--<a href="https://github.com/ry4nolson/dash" target="_blank">Contribute on GitHub</a>-->
+        <div class="clearfix">
+          <a class="github-button" href="https://github.com/ry4nolson" data-count-href="/ry4nolson/followers" data-count-api="/users/ry4nolson#followers"
+            data-count-aria-label="# followers on GitHub" aria-label="Follow @ry4nolson on GitHub">Follow @ry4nolson</a>
+          <!-- Place this tag where you want the button to render. -->
+          <a class="github-button" href="https://github.com/ry4nolson/dash" data-icon="octicon-eye" data-count-href="/ry4nolson/dash/watchers"
+            data-count-api="/repos/ry4nolson/dash#subscribers_count" data-count-aria-label="# watchers on GitHub" aria-label="Watch ry4nolson/dash on GitHub">Watch</a>
+        </div>
+        <div class="clearfix">
+          <!-- Place this tag where you want the button to render. -->
+          <a class="github-button" href="https://github.com/ry4nolson/dash" data-icon="octicon-star" data-count-href="/ry4nolson/dash/stargazers"
+            data-count-api="/repos/ry4nolson/dash#stargazers_count" data-count-aria-label="# stargazers on GitHub" aria-label="Star ry4nolson/dash on GitHub">Star</a>
+          <!-- Place this tag where you want the button to render. -->
+          <a class="github-button" href="https://github.com/ry4nolson/dash/fork" data-icon="octicon-repo-forked"
+            data-count-href="/ry4nolson/dash/network" data-count-api="/repos/ry4nolson/dash#forks_count" data-count-aria-label="# forks on GitHub"
+            aria-label="Fork ry4nolson/dash on GitHub">Fork</a>
+          <!-- Place this tag where you want the button to render. -->
+          <a class="github-button" href="https://github.com/ry4nolson/dash/issues" data-icon="octicon-issue-opened"
+            data-count-api="/repos/ry4nolson/dash#open_issues_count" data-count-aria-label="# issues on GitHub" aria-label="Issue ry4nolson/dash on GitHub">Issue</a>
+        </div>
       </div>
     </div>
   </div>
