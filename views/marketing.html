@@ -49,7 +49,6 @@
             <tr>
               <th>Adcodes</th>
               <th>Orders</th>
-              <th>Amount</th>
             </tr>
           </thead>
           <tbody>
@@ -59,6 +58,64 @@
               </td>
               <td>
                 {{ adcode.uses }}
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <div class="panel panel-default">
+      <div class="panel-heading">
+        Sources
+      </div>
+      <div class="panel-body">
+        <div ng-if="sources.total == 0">
+          No orders had sources today
+        </div>
+        <table class="items table" ng-if="sources.total > 0">
+          <thead>
+            <tr>
+              <th>Source</th>
+              <th>Orders</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr ng-repeat="source in sources.sources">
+              <td>
+                {{ source.name }}
+              </td>
+              <td>
+                {{ source.uses }}
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <div class="panel panel-default">
+      <div class="panel-heading">
+        Referrers
+      </div>
+      <div class="panel-body">
+        <div ng-if="referrers.total == 0">
+          No orders had referrers today
+        </div>
+        <table class="items table" ng-if="referrers.total > 0">
+          <thead>
+            <tr>
+              <th>Referrer</th>
+              <th>Orders</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr ng-repeat="referrer in referrers.referrers">
+              <td style="word-break:break-all;">
+                <a ng-href="{{ referrer.link }}" target="_blank">{{ referrer.name }}</a>
+              </td>
+              <td>
+                {{ referrer.uses }}
               </td>
             </tr>
           </tbody>
