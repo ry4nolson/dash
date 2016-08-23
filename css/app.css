@@ -114,12 +114,14 @@ select option:empty { display:none }
 
 .panel {
   box-shadow: none;
+  border: 0;
 }
 
 .panel-default>.panel-heading {
   background: transparent;
   font-size: 18px;
   font-weight: 300;
+  border: 0;
 
 }
 
