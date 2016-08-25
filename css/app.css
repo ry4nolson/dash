@@ -1,4 +1,5 @@
 body, html { min-height:100%; }
+html { font-size:20px; }
 .sidebar {
 
   background:#333;
@@ -169,3 +170,5 @@ label {
 .table {
   margin: 0;
 }
+
+.home-chart { height:200px; font-size:20px; }

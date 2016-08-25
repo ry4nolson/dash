@@ -3,6 +3,30 @@ app.controller("HomeController", function HomeController($scope, $rootScope, Ord
 	$rootScope.home = true;
 	var exports = {
 		loadData: function () {
+			
+			window.hours = [];
+			window.amounts = new Array(24);
+			window.compareAmounts = new Array(24);
+			for(var i = 0; i<=23; i++) {
+				hours.push(i);
+				amounts[i] = 0;
+				compareAmounts[i] = 0;
+			}
+
+			var orderCanvas = $(".order-chart")[0].getContext('2d');
+
+			function buildOrdersChart(){
+				var chart = new Chart(orderCanvas, {
+					type:'line',
+					data:{
+						labels:hours,
+						datasets: [
+							{ data: amounts, label: $rootScope.date.toLocaleDateString() }, 
+							{ data: compareAmounts, label: $rootScope.comparedate.toLocaleDateString()}]
+					}
+				});
+			}
+
 			OrdersFactory.getOrders().then(function (data) {
 				$scope.orders = {};
 				$scope.order_count = data.orders.length;
@@ -13,6 +37,21 @@ app.controller("HomeController", function HomeController($scope, $rootScope, Ord
 				for (var orderid in $scope.orders) {
 					$scope.getCustomerData($scope.orders[orderid].customer_id);
 				}
+
+				var runningTotal = 0;
+				for(var i in $scope.orders){
+					var d = new Date($scope.orders[i].created_at);
+					var h = d.getHours();
+					runningTotal += $scope.orders[i].grand_total;
+					amounts[h] = runningTotal;
+				}
+
+				for (var i = 1; i<=23; i++){
+					if (amounts[i] == 0)
+						amounts[i] = amounts[i-1];
+				}
+
+				buildOrdersChart();
 
 				$scope.coupons = 0;
 				$scope.adcodes = 0;
@@ -46,7 +85,20 @@ app.controller("HomeController", function HomeController($scope, $rootScope, Ord
 						$scope.compare_order_total_tonow += current.grand_total;
 					}
 				}
+				var runningTotal = 0;
+				for(var i in orders.orders){
+					var d = new Date(orders.orders[i].created_at);
+					var h = d.getHours();
+					runningTotal += orders.orders[i].grand_total;
+					compareAmounts[h] = runningTotal;
+				}
 
+				for (var i = 1; i<=23; i++){
+					if (compareAmounts[i] == 0)
+						compareAmounts[i] = compareAmounts[i-1];
+				}
+
+				buildOrdersChart();
 			});
 
 			$scope.totalItems = OrdersFactory.totalItems;
@@ -79,10 +131,25 @@ app.controller("HomeController", function HomeController($scope, $rootScope, Ord
 
 			$scope.newCustomers = 0;
 			$scope.repeatCustomers = 0;
+			var customerCanvas = $(".customer-chart")[0].getContext('2d');
+
 			$scope.getCustomerData = function (id) {
 				CustomersFactory.getCustomerOrders(id).then(function (data) {
 					if (data.orders.length == 1) $scope.newCustomers++;
 					else $scope.repeatCustomers++;
+
+					if ($scope.newCustomers + $scope.repeatCustomers == $scope.order_count){
+						var chart = new Chart(customerCanvas, {
+							type: 'pie',
+							data: { 
+								labels:['New', 'Repeat'],
+								datasets :[ {
+									data: [$scope.newCustomers, $scope.repeatCustomers],
+									backgroundColor : ["#f00", "#00f"]
+								}]
+							}
+						});
+					}
 				});
 			}
 			
@@ -91,6 +158,7 @@ app.controller("HomeController", function HomeController($scope, $rootScope, Ord
 			})
 		}
 	}
+
 	exports.loadData();
 	return exports;
 });
