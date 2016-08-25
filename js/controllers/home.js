@@ -1,4 +1,4 @@
-app.controller("HomeController", function HomeController($scope, $rootScope, OrdersFactory, OrderItemsFactory, CustomersFactory, ContentFactory) {
+app.controller("HomeController", function HomeController($scope, $rootScope, ApiFactory, OrdersFactory, OrderItemsFactory, CustomersFactory, ContentFactory, $q) {
 	$rootScope.currentController = this;
 	$rootScope.home = true;
 	var exports = {
@@ -144,34 +144,65 @@ app.controller("HomeController", function HomeController($scope, $rootScope, Ord
 						total += oItem.quantity;
 					}
 				}
-
-				var itemNames = [], itemTotals = [], itemQuantities = [];
-				for (var i in items) {
-					itemNames.push(i);
-					itemTotals.push(items[i].total);
-					itemQuantities.push(items[i].qty);
-				}
-
-				var itemsCanvas = $(".items-chart")[0].getContext('2d');
-
-				var chart = new Chart(itemsCanvas, {
-					type: 'bar',
-					data: {
-						labels: itemNames,
-						datasets: [{
-							label: 'Item Totals',
-							data: itemTotals
-						}/*,
-						{
-							label: 'Item Quantities',
-							data: itemQuantities
-						}*/]
-					}
-				});
-
-				console.log(itemQuantities);
 				$scope.total = total;
 				$scope.items = items;
+
+				var itemCalls = [];
+				// var itemNames = [], itemTotals = [], itemQuantities = [];
+				for (var i in items) {
+					itemCalls.push(ApiFactory.getEndpoint("products/" + items[i].id));
+					// itemNames.push(i);
+					// itemTotals.push(items[i].total);
+					// itemQuantities.push(items[i].qty);
+				}
+
+				var categoryCalls = [];
+				var categories = {};
+				$q.all(itemCalls).then(function(itemData){
+					for(var i in itemData){
+						categoryCalls.push(ApiFactory.getEndpoint("categories/" + itemData[i].primary_category_id));
+					}
+					$q.all(categoryCalls).then(function(catData){
+						for(var i in catData){
+							categories[catData[i].id] = {
+								name: catData[i].name,
+								total: 0
+							}
+						
+						}
+
+						for(var i in itemData){
+							categories[itemData[i].primary_category_id].total += items[itemData[i].item_name].total;
+						}
+						
+						var chartLabels = [], chartData = [];
+
+						for(var i in categories){
+							if (categories[i].name != "hidden-category"){
+								chartLabels.push(categories[i].name);
+								chartData.push(categories[i].total);
+							}
+						}
+
+						var itemsCanvas = $(".items-chart")[0].getContext('2d');
+
+						var chart = new Chart(itemsCanvas, {
+							type: 'bar',
+							data: {
+								labels: chartLabels,
+								datasets: [{
+									label: 'Totals',
+									data: chartData
+								}/*,
+								{
+									label: 'Item Quantities',
+									data: itemQuantities
+								}*/]
+							}
+						});
+					});
+				});
+
 			});
 
 			$scope.newCustomers = 0;
