@@ -28,12 +28,10 @@ body, html { min-height:100%; }
 
 .navbar-inverse .navbar-nav>li>a { color: #FFF; }
 
-/*
 .btn-primary {
   background: #169DD6;
   box-shadow: none;
 }
-*/
 
 .icon-bar {
     text-align:center;
@@ -113,7 +111,7 @@ select option:empty { display:none }
         opacity:0;
     }
 
-/*
+
 .panel {
   box-shadow: none;
   border: 0;
@@ -126,11 +124,11 @@ select option:empty { display:none }
   border: 0;
 
 }
-*/
+
 .panel-body {
   /*box-shadow: 0 0 12px 0px rgba(0,0,0,0.2);*/
 }
-/*
+
 .page-panel {
     padding: 0px 0;
     box-shadow: none;
@@ -170,4 +168,4 @@ label {
 
 .table {
   margin: 0;
-}*/
+}
