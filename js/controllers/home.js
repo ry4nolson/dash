@@ -58,15 +58,19 @@ app.controller("HomeController", function HomeController($scope, $rootScope, Api
 				}
 
 				var runningTotal = 0;
+				
 				for (var i in $scope.orders) {
 					var d = new Date($scope.orders[i].created_at);
 					var h = d.getHours();
 					runningTotal += $scope.orders[i].grand_total;
 					amounts[h] = runningTotal;
 				}
+				var limit = (new Date()).getHours();
 
 				for (var i = 1; i <= 23; i++) {
-					if (amounts[i] == 0)
+					if (i > limit)
+						amounts[i] = null;
+					else if (amounts[i] == 0)
 						amounts[i] = amounts[i - 1];
 				}
 
