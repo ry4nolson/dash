@@ -8,6 +8,7 @@
 					<a href="#/orders">Orders</a>
 				</div>
 				<div class="panel-body">
+					<canvas class="order-chart"></canvas>
 					<table class="table">
 						<tr>
 							<th>
@@ -41,7 +42,8 @@
 				<div class="panel-heading">
 					<a href="#/customers">Customers <i class="glyphicon glyphicon-eye-open page-quick-link"></i></a>
 				</div>
-				<div class="panel-body">
+				<div class="panel-body text-center">
+					<canvas class="customer-chart home-chart"></canvas>
 					<img src="images/ellipsis.gif" ng-if="newCustomers == undefined"> {{ newCustomers }} new -
 					<img src="images/ellipsis.gif" ng-if="repeatCustomers == undefined"> {{ repeatCustomers }} repeat
 				</div>

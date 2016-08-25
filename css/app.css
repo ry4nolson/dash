@@ -1,4 +1,5 @@
 body, html { min-height:100%; }
+html { font-size:20px; }
 .sidebar {
 
   background:#333;
@@ -168,4 +169,14 @@ label {
 
 .table {
   margin: 0;
+<<<<<<< HEAD
 }
+=======
+<<<<<<< HEAD
+}
+
+.home-chart { height:200px; font-size:20px; }
+=======
+}*/
+>>>>>>> d67a8519d0b0fc186a8023a62c1f567cc61deeef
+>>>>>>> master
