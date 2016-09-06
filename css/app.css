@@ -26,6 +26,10 @@ html { font-size:20px; }
     background-color: #0C182D;
 }
 
+.main {
+  background:#fff;
+  z-index: 10;
+}
 
 .navbar-inverse .navbar-nav>li>a { color: #FFF; }
 
