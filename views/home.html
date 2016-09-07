@@ -44,8 +44,10 @@
 				</div>
 				<div class="panel-body text-center">
 					<canvas class="customer-chart home-chart"></canvas>
-					<img src="images/ellipsis.gif" ng-if="newCustomers == undefined"> {{ newCustomers }} new -
-					<img src="images/ellipsis.gif" ng-if="repeatCustomers == undefined"> {{ repeatCustomers }} repeat
+					<img src="images/ellipsis.gif" ng-if="newCustomers == undefined"> 
+					{{ newCustomers }} ({{ ((newCustomers / (newCustomers + repeatCustomers)) * 100).toFixed(2)}}%) new -
+					<img src="images/ellipsis.gif" ng-if="repeatCustomers == undefined"> 
+					{{ repeatCustomers }} ({{ ((repeatCustomers / (newCustomers + repeatCustomers)) * 100).toFixed(2)}}%) repeat
 				</div>
 			</div>
 			<div class="panel panel-default">

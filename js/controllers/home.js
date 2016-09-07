@@ -5,17 +5,18 @@ app.controller("HomeController", function HomeController($scope, $rootScope, Api
 		loadData: function () {
 
 			window.hours = [];
-			window.amounts = new Array(24);
-			window.compareAmounts = new Array(24);
+			window.amounts = undefined;
+			window.compareAmounts = undefined;
 			for (var i = 0; i <= 23; i++) {
 				hours.push(i);
-				amounts[i] = 0;
-				compareAmounts[i] = 0;
 			}
 
 			var orderCanvas = $(".order-chart")[0].getContext('2d');
 
 			function buildOrdersChart() {
+				if (!amounts && !compareAmounts)
+					return;
+
 				var chart = new Chart(orderCanvas, {
 					type: 'line',
 					data: {
@@ -58,7 +59,7 @@ app.controller("HomeController", function HomeController($scope, $rootScope, Api
 				}
 
 				var runningTotal = 0;
-				
+				amounts = new Array(24);
 				for (var i in $scope.orders) {
 					var d = new Date($scope.orders[i].created_at);
 					var h = d.getHours();
@@ -70,7 +71,7 @@ app.controller("HomeController", function HomeController($scope, $rootScope, Api
 				for (var i = 1; i <= 23; i++) {
 					if (i > limit)
 						amounts[i] = null;
-					else if (amounts[i] == 0)
+					else if (amounts[i] == 0 || !amounts[i])
 						amounts[i] = amounts[i - 1];
 				}
 
@@ -109,6 +110,7 @@ app.controller("HomeController", function HomeController($scope, $rootScope, Api
 					}
 				}
 				var runningTotal = 0;
+				compareAmounts = new Array(24);
 				for (var i in orders.orders) {
 					var d = new Date(orders.orders[i].created_at);
 					var h = d.getHours();
@@ -117,7 +119,7 @@ app.controller("HomeController", function HomeController($scope, $rootScope, Api
 				}
 
 				for (var i = 1; i <= 23; i++) {
-					if (compareAmounts[i] == 0)
+					if (compareAmounts[i] == 0 || !compareAmounts[i])
 						compareAmounts[i] = compareAmounts[i - 1];
 				}
 
