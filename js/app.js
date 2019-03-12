@@ -44,8 +44,8 @@ app.run(function ($rootScope, $route, $location, $animate, Utility) {
   var dayOffset = (24 * 60 * 60 * 1000);
   $rootScope.dayOffset = dayOffset;
 
-  var comparedate = new Date();
-  comparedate.setTime(date.getDate() - 1);
+  var comparedate = new Date(date);
+  comparedate.setDate(date.getDate() - 1);
 
   $rootScope.date = date;
   $rootScope.endDay = endDay;
@@ -69,7 +69,7 @@ app.run(function ($rootScope, $route, $location, $animate, Utility) {
     var date = new Date($rootScope.date.getTime());
 
     $rootScope.requestCount = 0;
-    $rootScope.comparedate.setTime(date.getDate() - 1);
+    $rootScope.comparedate.setDate(date.getDate() - 1);
     // this is hacky in order to get the compare input to update.
     var comparedate = new Date($rootScope.comparedate.getTime());
     $rootScope.comparedate = comparedate;
