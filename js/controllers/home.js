@@ -11,9 +11,9 @@ app.controller("HomeController", function HomeController($scope, $rootScope, Api
 				hours.push(i);
 			}
 
-			var orderCanvas = $(".order-chart")[0].getContext('2d');
 
 			function buildOrdersChart() {
+				var orderCanvas = $(".order-chart")[0].getContext('2d');
 				if (!amounts && !compareAmounts)
 					return;
 
@@ -213,10 +213,11 @@ app.controller("HomeController", function HomeController($scope, $rootScope, Api
 
 			$scope.newCustomers = 0;
 			$scope.repeatCustomers = 0;
-			var customerCanvas = $(".customer-chart")[0].getContext('2d');
 
 			$scope.getCustomerData = function (id) {
 				CustomersFactory.getCustomerOrders(id).then(function (data) {
+					
+					var customerCanvas = $(".customer-chart")[0].getContext('2d');
 					if (data.orders.length == 1) $scope.newCustomers++;
 					else $scope.repeatCustomers++;
 
