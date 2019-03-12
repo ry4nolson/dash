@@ -75,7 +75,8 @@ app.controller("HomeController", function HomeController($scope, $rootScope, Api
 						amounts[i] = amounts[i - 1];
 				}
 
-				buildOrdersChart();
+				//hold teh phone a bit.
+				setTimeout(buildOrdersChart, 100);
 
 				$scope.coupons = 0;
 				$scope.adcodes = 0;
