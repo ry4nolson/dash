@@ -124,7 +124,7 @@ app.controller("HomeController", function HomeController($scope, $rootScope, Api
 						compareAmounts[i] = compareAmounts[i - 1];
 				}
 
-				buildOrdersChart();
+				setTimeout(buildOrdersChart, 100);
 			});
 
 			$scope.totalItems = OrdersFactory.totalItems;
