@@ -26,7 +26,10 @@ app.controller("LoginController", function LoginController($scope, $rootScope, $
 				'Content-Type': 'application/json'
 			},
 			dataType: 'JSON'
-		}).then(handleAuth);
+		}).then(handleAuth)
+		.fail(function() {
+			$rootScope.doLogin();
+		});
 	}
 	
 	$rootScope.doLogin = function () {
