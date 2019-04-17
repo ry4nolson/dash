@@ -29,7 +29,8 @@ app.run(function ($rootScope, $route, $location, $animate, Utility) {
     auth_id: localStorage.getItem('oauth_auth_id'),
     code: localStorage.getItem('oauth_code'),
     client_id: localStorage.getItem('oauth_client_id'),
-    secret: localStorage.getItem('oauth_secret')
+    secret: localStorage.getItem('oauth_secret'),
+    auth_expiration: localStorage.getItem("auth_expiration")
   }
 
   $rootScope.location = $location
@@ -52,7 +53,7 @@ app.run(function ($rootScope, $route, $location, $animate, Utility) {
   $rootScope.date = date;
   $rootScope.endDay = endDay;
   $rootScope.comparedate = comparedate;
-  $rootScope.comapreDateNow = new Date(now.getDate() - 1);
+  $rootScope.compareDateNow = new Date(now.getDate() - 1);
   $rootScope.now = now;
 
   $animate.enabled(true);
