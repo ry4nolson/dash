@@ -29,7 +29,7 @@ app.controller("LoginController", function LoginController($scope, $rootScope, $
 			error: function() {
 				$rootScope.doLogin();
 			}
-		}).then(handleAuth);
+		}).then(handleAuth, $rootScope.doLogin);
 	}
 	
 	$rootScope.doLogin = function () {
