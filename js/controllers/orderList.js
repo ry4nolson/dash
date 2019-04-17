@@ -23,7 +23,7 @@ angular
 			// 	$scope.yesterday_total = orders.total;
 			// });
 
-			$scope.getTime = function (date) {
+			$rootScope.getTime = function (date) {
 				var d = new Date(date);
 				var ampm = d.getHours() > 11 ? "pm" : "am";
 				var h = d.getHours() > 11 ? d.getHours() - 12 : d.getHours();
