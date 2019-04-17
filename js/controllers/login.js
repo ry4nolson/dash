@@ -1,6 +1,33 @@
 app.controller("LoginController", function LoginController($scope, $rootScope, $location, ApiFactory, $http) {
 	$scope.domain = $rootScope.oauth.domain;
 	$rootScope.login = true;
+
+	$rootScope.doRefreshAuth = function(){
+
+		$rootScope.authenticated = true;
+		$scope.showLoading = true;
+
+		localStorage.setItem("authenticated", $rootScope.oauth.authenticated);
+		
+		var sha = new jsSHA('SHA-256', 'TEXT');
+		console.log($rootScope.oauth);
+		sha.update(($rootScope.oauth.secret + $rootScope.oauth.code + $rootScope.oauth.client_id + $rootScope.oauth.scope + decodeURIComponent($rootScope.oauth.redirect_uri)).toLowerCase());
+		$rootScope.oauth.signature = sha.getHash('HEX');
+
+		$http({
+			method: 'POST',
+			url: 'https://' + $scope.domain + '/api/oauth/refresh',
+			data: {
+				client_id: $rootScope.oauth.client_id,
+				refresh_token: $rootScope.oauth.refresh_token,
+				signature: $rootScope.oauth.signature
+			},
+			headers: {
+				'Content-Type': 'application/json'
+			},
+			dataType: 'JSON'
+		}).then(handleAuth);
+	}
 	
 	$rootScope.doLogin = function () {
 		// if (localStorage.getItem("authenticated"))
@@ -43,26 +70,7 @@ app.controller("LoginController", function LoginController($scope, $rootScope, $
 						'Content-Type': 'application/json'
 					},
 					dataType: 'JSON'
-				}).then(function (res) {
-					console.log(res)
-					$rootScope.oauth.access_token = res.data.access_token;
-					$rootScope.oauth.refresh_token = res.data.refresh_token;
-
-					ApiFactory.getEndpoint("stores", {}, true).then(function (data) {
-						console.log(data);
-						setStoreInfo(data);
-					});
-
-					localStorage.setItem('access_token', $rootScope.oauth.access_token);
-					localStorage.setItem('refresh_token', $rootScope.oauth.refresh_token);
-					localStorage.setItem('signature', $rootScope.oauth.signature);
-
-					if ($location.search().rdr !== '/login') {
-						$location.path($location.search().rdr).search('rdr', null);
-					} else {
-						$location.path("/").search('rdr', null);
-					}
-				});
+				}).then(handleAuth);
 			}
 		} else {
 			localStorage.setItem('domain', $scope.domain);
@@ -74,6 +82,27 @@ app.controller("LoginController", function LoginController($scope, $rootScope, $
 
 	if ($scope.domain == localStorage.getItem('domain') && $rootScope.oauth.auth_id) {
 		$rootScope.doLogin();
+	}
+
+	function handleAuth (res) {
+		console.log(res)
+		$rootScope.oauth.access_token = res.data.access_token;
+		$rootScope.oauth.refresh_token = res.data.refresh_token;
+
+		ApiFactory.getEndpoint("stores", {}, true).then(function (data) {
+			console.log(data);
+			setStoreInfo(data);
+		});
+
+		localStorage.setItem('access_token', $rootScope.oauth.access_token);
+		localStorage.setItem('refresh_token', $rootScope.oauth.refresh_token);
+		localStorage.setItem('signature', $rootScope.oauth.signature);
+
+		if ($location.search().rdr !== '/login') {
+			$location.path($location.search().rdr).search('rdr', null);
+		} else {
+			$location.path("/").search('rdr', null);
+		}
 	}
 
 	function setStoreInfo(data){

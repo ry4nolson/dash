@@ -4,6 +4,8 @@ var app = angular.module('mobileDash', [
   'angular-loading-bar'
 ]);
 
+//asdfd
+
 app.run(function ($rootScope, $route, $location, $animate, Utility) {
 
   function getRedirectUrl() {
@@ -137,7 +139,7 @@ app.filter("orderObjectBy", function () {
 
 app.directive("backLink", function () {
   return {
-    template: "<a href=\"javascript:history.go(-1);\">&larr; back</a> | "
+    template: "<a href=\"javascript:history.go(-1);\">&larr; back</a>"
   };
 });
 

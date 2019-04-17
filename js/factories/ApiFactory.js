@@ -49,8 +49,12 @@ angular.module("mobileDash")
 						if (status == 429)
 							setTimeout(query, 1000);
 						else if (status == 401){
-							$rootScope.doLogout();
-							$rootScope.doLogin();
+							if ($rootScope.auth.domain && $rootScope.oauth.refresh_token){
+								$rootScope.doRefreshAuth();
+							} else {
+								$rootScope.doLogout();
+								$rootScope.doLogin();
+							}
 							//$location.path("/login"):
 						}
 					});
