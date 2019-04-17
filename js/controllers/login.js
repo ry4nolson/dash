@@ -89,6 +89,7 @@ app.controller("LoginController", function LoginController($scope, $rootScope, $
 		$rootScope.oauth.access_token = res.data.access_token;
 		$rootScope.oauth.refresh_token = res.data.refresh_token;
 		$rootScope.oauth.auth_expiration = res.data.expires;
+		$rootScope.oauth.auth_expiration_date = new Date($rootScope.oauth.auth_expiration);
 		
 		ApiFactory.getEndpoint("stores", {}, true).then(function (data) {
 			console.log(data);
@@ -99,6 +100,7 @@ app.controller("LoginController", function LoginController($scope, $rootScope, $
 		localStorage.setItem('refresh_token', $rootScope.oauth.refresh_token);
 		localStorage.setItem('signature', $rootScope.oauth.signature);
 		localStorage.setItem('auth_expiration', $rootScope.oauth.auth_expiration);
+		localStorage.setItem('auth_expiration_date', $rootScope.oauth.auth_expiration_date);
 
 		if ($location.search().rdr !== '/login') {
 			$location.path($location.search().rdr).search('rdr', null);

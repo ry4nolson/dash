@@ -30,7 +30,8 @@ app.run(function ($rootScope, $route, $location, $animate, Utility) {
     code: localStorage.getItem('oauth_code'),
     client_id: localStorage.getItem('oauth_client_id'),
     secret: localStorage.getItem('oauth_secret'),
-    auth_expiration: localStorage.getItem("auth_expiration")
+    auth_expiration: localStorage.getItem("auth_expiration"),
+    auth_expiration_date: localStorage.getItem("auth_expiration_date")
   }
 
   $rootScope.location = $location
