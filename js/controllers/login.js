@@ -29,7 +29,9 @@ app.controller("LoginController", function LoginController($scope, $rootScope, $
 			error: function() {
 				$rootScope.doLogin();
 			}
-		}).then(handleAuth, $rootScope.doLogin);
+		}).then(handleAuth, function() {
+			$rootScope.doFullLogin()
+		});
 	}
 	
 	$rootScope.doLogin = function () {
@@ -51,29 +53,7 @@ app.controller("LoginController", function LoginController($scope, $rootScope, $
 					}
 				});
 			} else {
-				$rootScope.authenticated = true;
-				$scope.showLoading = true;
-
-				localStorage.setItem("authenticated", $rootScope.oauth.authenticated);
-				
-        var sha = new jsSHA('SHA-256', 'TEXT');
-        console.log($rootScope.oauth);
-        sha.update(($rootScope.oauth.secret + $rootScope.oauth.code + $rootScope.oauth.client_id + $rootScope.oauth.scope + decodeURIComponent($rootScope.oauth.redirect_uri)).toLowerCase());
-        $rootScope.oauth.signature = sha.getHash('HEX');
-
-				$http({
-					method: 'POST',
-					url: 'https://' + $scope.domain + '/api/oauth/access_token',
-					data: {
-						client_id: $rootScope.oauth.client_id,
-						auth_id: $rootScope.oauth.auth_id,
-						signature: $rootScope.oauth.signature
-					},
-					headers: {
-						'Content-Type': 'application/json'
-					},
-					dataType: 'JSON'
-				}).then(handleAuth);
+				$rootScope.doFullLogin();
 			}
 		} else {
 			localStorage.setItem('domain', $scope.domain);
@@ -81,6 +61,32 @@ app.controller("LoginController", function LoginController($scope, $rootScope, $
 		}
 
 		localStorage.setItem("authenticated", $rootScope.oauth.authenticated);
+	}
+
+	$rootScope.doFullLogin = function() {
+		$rootScope.authenticated = true;
+		$scope.showLoading = true;
+
+		localStorage.setItem("authenticated", $rootScope.oauth.authenticated);
+		
+		var sha = new jsSHA('SHA-256', 'TEXT');
+		console.log($rootScope.oauth);
+		sha.update(($rootScope.oauth.secret + $rootScope.oauth.code + $rootScope.oauth.client_id + $rootScope.oauth.scope + decodeURIComponent($rootScope.oauth.redirect_uri)).toLowerCase());
+		$rootScope.oauth.signature = sha.getHash('HEX');
+
+		$http({
+			method: 'POST',
+			url: 'https://' + $scope.domain + '/api/oauth/access_token',
+			data: {
+				client_id: $rootScope.oauth.client_id,
+				auth_id: $rootScope.oauth.auth_id,
+				signature: $rootScope.oauth.signature
+			},
+			headers: {
+				'Content-Type': 'application/json'
+			},
+			dataType: 'JSON'
+		}).then(handleAuth);
 	}
 
 	if ($scope.domain == localStorage.getItem('domain') && $rootScope.oauth.auth_id) {
