@@ -25,12 +25,10 @@ app.controller("LoginController", function LoginController($scope, $rootScope, $
 			headers: {
 				'Content-Type': 'application/json'
 			},
-			dataType: 'JSON',
-			error: function() {
-				$rootScope.doLogin();
-			}
+			dataType: 'JSON'
 		}).then(handleAuth, function() {
-			$rootScope.doFullLogin()
+			localStorage.setItem('domain', $scope.domain);
+			window.location.href = 'https://' + $scope.domain + $rootScope.oauth.authUrl + '?client_id=' + $rootScope.oauth.app_id + '&scope=' + $rootScope.oauth.scope + '&redirect_uri=' + $rootScope.oauth.redirect_uri;
 		});
 	}
 	
